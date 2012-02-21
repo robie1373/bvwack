@@ -67,20 +67,24 @@ end
 
 def echo_base_dirs(options)
   if options[:base_dir]
-    puts "Operating in #{ options[:base_dir]}"
-    puts "I will create #{ options[:base_dir]}/bvwack-back to store converted files if you use clean-up."
+    puts "\nOperating in #{ options[:base_dir]}"
+    puts "I will create #{ options[:base_dir]}/bvwack-back to store converted files if you use clean-up.\n\n"
   else
-    puts "Operating in #{DEFAULT_CONVERT_BASE_DIR}\n\n"
+    puts "\nOperating in #{DEFAULT_CONVERT_BASE_DIR}"
     puts "I will create #{ DEFAULT_CLEAN_BASE_DIR} to store converted files if you use clean-up.\n\n"
   end
 end
 
 def convert(path_to_file)
-  `ffmpeg -i "#{path_to_file}" #{FFMPEG_OPTS} "#{path_to_file.gsub(/mkv$|avi$/, "ipad.mp4")}"`
+  if path_to_file.class == String
+    `ffmpeg -i "#{path_to_file}" #{FFMPEG_OPTS} "#{path_to_file.gsub(/mkv$|avi$/, "ipad.mp4")}"`
+  end
 end
 
 def dry_run(path_to_file)
-  puts "ffmpeg -i #{path_to_file} #{FFMPEG_OPTS} #{path_to_file.gsub(/mkv$|avi$/, "ipad.mp4")}\n\n"
+  if path_to_file.class == String
+    puts "ffmpeg -i #{path_to_file} #{FFMPEG_OPTS} #{path_to_file.gsub(/mkv$|avi$/, "ipad.mp4")}\n\n"
+  end
 end
 
 
@@ -108,7 +112,7 @@ def get_all_files(options)
   Dir.chdir(base_dir)
   converted_files = Dir.glob(File.join("**", "*ipad.mp4"))
   converted_files.each do |i|
-    if Dir.glob(File.join("**", "*ipad.mp4")).include?("bvwack-back")
+    if i.include?("bvwack-back")
       next
     else
       @converted_files[File.basename(i, ".ipad.mp4")] = i
@@ -117,7 +121,7 @@ def get_all_files(options)
 
   not_converted_files = Dir.glob(File.join("**", "*.{mkv,avi}"))
   not_converted_files.each do |i|
-    if Dir.glob(File.join("**", "*.{mkv,avi}")).include?("bvwack-back")
+    if i.include?("bvwack-back")
       next
     else
       if File.basename(i).split(".").last == "mkv"
@@ -146,8 +150,8 @@ def clean_up(options)
     filename = @not_converted_files[key]
     dirname  = File.dirname(@not_converted_files[key])
     `mkdir -p "#{clean_dir}/#{dirname}" && mv "#{filename}" "#{clean_dir}/#{filename}"`
-  else
-    puts "No more files to clean. Hooray!"
+  #else
+  #  puts "No more files to clean. Hooray!"
   end
 end
 
@@ -161,9 +165,13 @@ def dry_clean_up(options)
     key      = @to_clean.pop
     filename = @not_converted_files[key]
     dirname  = File.dirname(@not_converted_files[key])
+    print "\n\ndirname: "
+    p dirname
+    print "\n\nclean_dir: "
+    p clean_dir
     puts %Q{mkdir -p "#{clean_dir}/#{dirname}" && mv "#{filename}" "#{clean_dir}/#{filename}"\n\n}
-  else
-    puts "No more files to clean. Hooray!"
+  #else
+  #  puts "No more files to clean. Hooray!"
   end
 end
 
@@ -175,9 +183,9 @@ def list_converted
       old_filename       = @not_converted_files[key]
       dirname            = File.dirname(@not_converted_files[key])
       puts "Converted file:\n"
-      puts "in Directory #{dirname}"
-      p `ls -lh #{converted_filename}`
-      p `ls -lh #{old_filename}`
+      puts %Q{in Directory "#{dirname}"}
+      p `ls -lh "#{converted_filename}"`
+      p `ls -lh "#{old_filename}"`
       puts %Q{To test run:  open "#{converted_filename}"}
       puts "\n\n"
     end
