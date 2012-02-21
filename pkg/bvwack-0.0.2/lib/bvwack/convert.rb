@@ -70,8 +70,8 @@ def echo_base_dirs(options)
     puts "Operating in #{ options[:base_dir]}"
     puts "I will create #{ options[:base_dir]}/bvwack-back to store converted files if you use clean-up."
   else
-    puts "Operating in #{DEFAULT_CONVERT_BASE_DIR}\n\n"
-    puts "I will create #{ DEFAULT_CLEAN_BASE_DIR} to store converted files if you use clean-up.\n\n"
+    puts "Operating in #{DEFAULT_CONVERT_BASE_DIR}"
+    puts "I will create #{ DEFAULT_CLEAN_BASE_DIR} to store converted files if you use clean-up."
   end
 end
 
@@ -135,7 +135,7 @@ def get_unconverted_files(converted_files, not_converted_files)
   end
 end
 
-def clean_up(options)
+def clean_up
   if options[:base_dir]
     clean_dir = "#{options[:base_dir]}/bvwack-back"
   else
@@ -145,13 +145,15 @@ def clean_up(options)
     key      = @to_clean.pop
     filename = @not_converted_files[key]
     dirname  = File.dirname(@not_converted_files[key])
+    #puts %Q{mkdir -p "/Volumes/thundar/media/video/converted/#{dirname}" && mv "#{filename}" "/Volumes/thundar/media/video/converted/#{filename}"}
+    #puts "This would mv #{@converted_files[key]} /Volumes/thundar/media/video/converted/#{@converted_files[key]}"
     `mkdir -p "#{clean_dir}/#{dirname}" && mv "#{filename}" "#{clean_dir}/#{filename}"`
   else
     puts "No more files to clean. Hooray!"
   end
 end
 
-def dry_clean_up(options)
+def dry_clean_up
   if options[:base_dir]
     clean_dir = "#{options[:base_dir]}/bvwack-back"
   else
@@ -170,6 +172,7 @@ end
 def list_converted
   begin
     while @to_clean
+      #if @to_clean.length > 0
       key                = @to_clean.pop
       converted_filename = @converted_files[key]
       old_filename       = @not_converted_files[key]
@@ -196,6 +199,8 @@ else
 end
 
 case
+  #when options[:help] == TRUE
+  #  puts help_text
   when options[:wack] == TRUE && options[:clean_up] == TRUE
     puts("Error! -w (--wack) and -c (--clean-up) cannot be used simultaneously.")
   when options[:list_converted] == TRUE
@@ -209,7 +214,7 @@ case
     @to_clean = @not_converted_files.keys & @converted_files.keys
     echo_base_dirs(options)
     (0..limit).each do
-      dry_clean_up(options)
+      dry_clean_up
     end
   when options[:clean_up] == TRUE
     get_all_files(options)
@@ -218,7 +223,7 @@ case
     echo_base_dirs(options)
     (0..limit).each do
       puts "I would have run clean_up"
-      #clean_up(options)
+      #clean_up
     end
   when options[:dry_run] == TRUE && options[:wack] == TRUE
     get_all_files(options)
