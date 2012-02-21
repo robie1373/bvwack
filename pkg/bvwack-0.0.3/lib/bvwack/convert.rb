@@ -165,10 +165,6 @@ def dry_clean_up(options)
     key      = @to_clean.pop
     filename = @not_converted_files[key]
     dirname  = File.dirname(@not_converted_files[key])
-    print "\n\ndirname: "
-    p dirname
-    print "\n\nclean_dir: "
-    p clean_dir
     puts %Q{mkdir -p "#{clean_dir}/#{dirname}" && mv "#{filename}" "#{clean_dir}/#{filename}"\n\n}
   #else
   #  puts "No more files to clean. Hooray!"
