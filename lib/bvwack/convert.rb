@@ -1,7 +1,7 @@
 require 'optparse'
 
-DEFAULT_CONVERT_BASE_DIR = "#{ENV['HOME']}"
-DEFAULT_CLEAN_BASE_DIR   = "#{ENV['HOME']}/bvwack-back"
+DEFAULT_CONVERT_BASE_DIR = "#{ENV['PWD']}"
+DEFAULT_CLEAN_BASE_DIR   = "#{ENV['PWD']}/bvwack-back"
 FFMPEG_OPTS              = "-acodec aac -ac 2 -ab 160k -s 1024x768 -vcodec libx264 -vpre slow -vpre iPod640 -vb 1200k -f mp4 -threads 2 -strict experimental"
 help_text                = "
 Usage: bvwack <options>
@@ -31,8 +31,8 @@ Examples:
 @not_converted_files = { }
 @to_convert = []
 
-puts "#{DEFAULT_CONVERT_BASE_DIR}"
-puts "#{DEFAULT_CLEAN_BASE_DIR}"
+puts "Operating in #{DEFAULT_CONVERT_BASE_DIR}"
+puts "I will create #{DEFAULT_CLEAN_BASE_DIR} to store converted files if you use clean-up."
 
 options       = { }
 option_parser = OptionParser.new do |opts|
@@ -89,7 +89,7 @@ def get_files(args)
 end
 
 
-def get_all_files
+def get_all_files(options)
   if options[:base_dir]
     base_dir = options[:base_dir]
   else
@@ -118,7 +118,6 @@ def get_all_files
     end
   end
 end
-
 
 def get_unconverted_files(converted_files, not_converted_files)
   (not_converted_files.keys - converted_files.keys).each do |key|
@@ -167,13 +166,8 @@ def list_converted
   end
 end
 
-
 option_parser.parse!
 puts options.inspect
-
-
-
-
 
 if options[:num_files]
   limit = (options[:num_files] - 1).to_i
@@ -187,19 +181,19 @@ case
   when options[:wack] == TRUE && options[:clean_up] == TRUE
     puts("Error! -w (--wack) and -c (--clean-up) cannot be used simultaneously.")
   when options[:list_converted] == TRUE
-    get_all_files
+    get_all_files(options)
     get_unconverted_files(@converted_files, @not_converted_files)
     @to_clean = @not_converted_files.keys & @converted_files.keys
     list_converted
   when options[:dry_run] == TRUE && options[:clean_up] == TRUE
-    get_all_files
+    get_all_files(options)
     get_unconverted_files(@converted_files, @not_converted_files)
     @to_clean = @not_converted_files.keys & @converted_files.keys
     (0..limit).each do
       dry_clean_up
     end
   when options[:clean_up] == TRUE
-    get_all_files
+    get_all_files(options)
     get_unconverted_files(@converted_files, @not_converted_files)
     @to_clean = @not_converted_files.keys & @converted_files.keys
     (0..limit).each do
@@ -207,7 +201,7 @@ case
       #clean_up
     end
   when options[:dry_run] == TRUE && options[:wack] == TRUE
-    get_all_files
+    get_all_files(options)
     get_unconverted_files(@converted_files, @not_converted_files)
     @to_clean = @not_converted_files.keys & @converted_files.keys
     (0..limit).each do |i|
@@ -215,7 +209,7 @@ case
       dry_run(file)
     end
   when options[:wack] == TRUE
-    get_all_files
+    get_all_files(options)
     get_unconverted_files(@converted_files, @not_converted_files)
     @to_clean = @not_converted_files.keys & @converted_files.keys
     (0..limit).each do |i|
