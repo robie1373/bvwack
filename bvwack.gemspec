@@ -10,8 +10,11 @@ Gem::Specification.new do |s|
   s.homepage = ""
   s.summary = %q{bvwack will wack it's way your pile of unconverted video files.'}
   s.description = %q{Super simple utility to help you convert all your videos to iPad ready files.}
+  s.requirements = [ 'ffmpeg and a libx264-slow.ffpreset (possibly in your ~/.ffmpeg/ directory.) Google is your friend.']
   s.rubyforge_project = "bvwack"
-  s.files = ["lib/bvwack/convert.rb", "lib/bvwack/bvwack_version.rb", "lib/bv"]
-  s.executables = ["bin/bvwack"]
+  s.required_ruby_version = '>=1.9'
+  s.files = Dir['**/**']
+  #s.files = ["lib/bvwack.rb", "lib/bvwack/convert.rb", "lib/bvwack/bvwack_version.rb", "bin/bvwack"]
+  s.executables = ["bvwack"]
   s.add_dependency("optparse")
 end
