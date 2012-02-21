@@ -22,6 +22,8 @@ Notes: By default this will not work for you. You must change DEFAULT_CONVERT_BA
        converting things. If you just want to hog through video try setting -threads 0
        in FFMPEG_OPTS. Currently this only works on UNIX-like systems.
 
+Requirements: ffmpeg and a libx264-slow.ffpreset (possibly in your ~/.ffmpeg/ directory or in your Cellar if you use brew.) Google is your friend.
+
 Examples:
     bvwack -dw                             Shows proposed commands for 2 videos
     bvwack -w -b somedir/anotherdir -n 5   Converts 5 videos under somedir/anotherdir
@@ -31,8 +33,6 @@ Examples:
 @not_converted_files = { }
 @to_convert          = []
 
-puts "Operating in #{DEFAULT_CONVERT_BASE_DIR}"
-puts "I will create #{DEFAULT_CLEAN_BASE_DIR} to store converted files if you use clean-up."
 
 options       = { }
 option_parser = OptionParser.new do |opts|
@@ -62,6 +62,16 @@ option_parser = OptionParser.new do |opts|
 
   opts.on("-w", "--wack") do
     options[:wack] = true
+  end
+end
+
+def echo_base_dirs(options)
+  if options[:base_dir]
+    puts "Operating in #{ options[:base_dir]}"
+    puts "I will create #{ options[:base_dir]}/bvwack-back to store converted files if you use clean-up."
+  else
+    puts "Operating in #{DEFAULT_CONVERT_BASE_DIR}"
+    puts "I will create #{ DEFAULT_CLEAN_BASE_DIR} to store converted files if you use clean-up."
   end
 end
 
@@ -126,24 +136,34 @@ def get_unconverted_files(converted_files, not_converted_files)
 end
 
 def clean_up
+  if options[:base_dir]
+    clean_dir = "#{options[:base_dir]}/bvwack-back"
+  else
+    clean_dir = DEFAULT_CONVERT_BASE_DIR
+  end
   if @to_clean.length > 0
     key      = @to_clean.pop
     filename = @not_converted_files[key]
     dirname  = File.dirname(@not_converted_files[key])
     #puts %Q{mkdir -p "/Volumes/thundar/media/video/converted/#{dirname}" && mv "#{filename}" "/Volumes/thundar/media/video/converted/#{filename}"}
     #puts "This would mv #{@converted_files[key]} /Volumes/thundar/media/video/converted/#{@converted_files[key]}"
-    `mkdir -p "#{DEFAULT_CLEAN_BASE_DIR}/#{dirname}" && mv "#{filename}" "#{DEFAULT_CLEAN_BASE_DIR}/#{filename}"`
+    `mkdir -p "#{clean_dir}/#{dirname}" && mv "#{filename}" "#{clean_dir}/#{filename}"`
   else
     puts "No more files to clean. Hooray!"
   end
 end
 
 def dry_clean_up
+  if options[:base_dir]
+    clean_dir = "#{options[:base_dir]}/bvwack-back"
+  else
+    clean_dir = DEFAULT_CONVERT_BASE_DIR
+  end
   if @to_clean.length > 0
     key      = @to_clean.pop
     filename = @not_converted_files[key]
     dirname  = File.dirname(@not_converted_files[key])
-    puts %Q{mkdir -p "#{DEFAULT_CLEAN_BASE_DIR}/#{dirname}" && mv "#{filename}" "#{DEFAULT_CLEAN_BASE_DIR}/#{filename}"\n\n}
+    puts %Q{mkdir -p "#{clean_dir}/#{dirname}" && mv "#{filename}" "#{clean_dir}/#{filename}"\n\n}
   else
     puts "No more files to clean. Hooray!"
   end
@@ -192,6 +212,7 @@ case
     get_all_files(options)
     get_unconverted_files(@converted_files, @not_converted_files)
     @to_clean = @not_converted_files.keys & @converted_files.keys
+    echo_base_dirs(options)
     (0..limit).each do
       dry_clean_up
     end
@@ -199,6 +220,7 @@ case
     get_all_files(options)
     get_unconverted_files(@converted_files, @not_converted_files)
     @to_clean = @not_converted_files.keys & @converted_files.keys
+    echo_base_dirs(options)
     (0..limit).each do
       puts "I would have run clean_up"
       #clean_up
@@ -207,6 +229,7 @@ case
     get_all_files(options)
     get_unconverted_files(@converted_files, @not_converted_files)
     @to_clean = @not_converted_files.keys & @converted_files.keys
+    echo_base_dirs(options)
     (0..limit).each do |i|
       file = @to_convert[i]
       dry_run(file)
@@ -215,6 +238,7 @@ case
     get_all_files(options)
     get_unconverted_files(@converted_files, @not_converted_files)
     @to_clean = @not_converted_files.keys & @converted_files.keys
+    echo_base_dirs(options)
     (0..limit).each do |i|
       file = @to_convert[i]
       puts "I would have run convert(file)"
