@@ -175,9 +175,9 @@ def list_converted
       old_filename       = @not_converted_files[key]
       dirname            = File.dirname(@not_converted_files[key])
       puts "Converted file:\n"
-      puts "in Directory #{dirname}"
-      p `ls -lh #{converted_filename}`
-      p `ls -lh #{old_filename}`
+      puts %Q{in Directory "#{dirname}"}
+      p `ls -lh "#{converted_filename}"`
+      p `ls -lh "#{old_filename}"`
       puts %Q{To test run:  open "#{converted_filename}"}
       puts "\n\n"
     end
