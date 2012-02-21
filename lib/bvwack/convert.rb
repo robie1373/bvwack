@@ -29,7 +29,7 @@ Examples:
 
 @converted_files     = { }
 @not_converted_files = { }
-@to_convert = []
+@to_convert          = []
 
 puts "Operating in #{DEFAULT_CONVERT_BASE_DIR}"
 puts "I will create #{DEFAULT_CLEAN_BASE_DIR} to store converted files if you use clean-up."
@@ -150,19 +150,22 @@ def dry_clean_up
 end
 
 def list_converted
-  while @to_clean
-    #if @to_clean.length > 0
-    key                = @to_clean.pop
-    converted_filename = @converted_files[key]
-    old_filename       = @not_converted_files[key]
-    dirname            = File.dirname(@not_converted_files[key])
-    puts "Converted file:\n"
-    puts "in Directory #{dirname}"
-    p `ls -lh #{converted_filename}`
-    p `ls -lh #{old_filename}`
-    puts %Q{To test run:  open "#{converted_filename}"}
-    puts "\n\n"
-    #end
+  begin
+    while @to_clean
+      #if @to_clean.length > 0
+      key                = @to_clean.pop
+      converted_filename = @converted_files[key]
+      old_filename       = @not_converted_files[key]
+      dirname            = File.dirname(@not_converted_files[key])
+      puts "Converted file:\n"
+      puts "in Directory #{dirname}"
+      p `ls -lh #{converted_filename}`
+      p `ls -lh #{old_filename}`
+      puts %Q{To test run:  open "#{converted_filename}"}
+      puts "\n\n"
+    end
+  rescue
+    puts("Nothing to list")
   end
 end
 
