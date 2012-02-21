@@ -76,7 +76,7 @@ def echo_base_dirs(options)
 end
 
 def convert(path_to_file)
-  `ffmpeg -i #{path_to_file} #{FFMPEG_OPTS} #{path_to_file.gsub(/mkv$|avi$/, "ipad.mp4")}`
+  `ffmpeg -i "#{path_to_file}" #{FFMPEG_OPTS} "#{path_to_file.gsub(/mkv$|avi$/, "ipad.mp4")}"`
 end
 
 def dry_run(path_to_file)
@@ -217,8 +217,8 @@ case
     @to_clean = @not_converted_files.keys & @converted_files.keys
     echo_base_dirs(options)
     (0..limit).each do
-      puts "I would have run clean_up"
-      #clean_up(options)
+      #puts "I would have run clean_up"
+      clean_up(options)
     end
   when options[:dry_run] == TRUE && options[:wack] == TRUE
     get_all_files(options)
@@ -236,8 +236,8 @@ case
     echo_base_dirs(options)
     (0..limit).each do |i|
       file = @to_convert[i]
-      puts "I would have run convert(file)"
-      #convert(file)
+      #puts "I would have run convert(file)"
+      convert(file)
     end
   else
     puts help_text

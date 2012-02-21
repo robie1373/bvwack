@@ -76,7 +76,7 @@ def echo_base_dirs(options)
 end
 
 def convert(path_to_file)
-  `ffmpeg -i #{path_to_file} #{FFMPEG_OPTS} #{path_to_file.gsub(/mkv$|avi$/, "ipad.mp4")}`
+  `ffmpeg -i "#{path_to_file}" #{FFMPEG_OPTS} "#{path_to_file.gsub(/mkv$|avi$/, "ipad.mp4")}"`
 end
 
 def dry_run(path_to_file)
