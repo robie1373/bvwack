@@ -143,7 +143,7 @@ def clean_up(options)
   if options[:base_dir]
     clean_dir = "#{options[:base_dir]}/bvwack-back"
   else
-    clean_dir = DEFAULT_CONVERT_BASE_DIR
+    clean_dir = DEFAULT_CLEAN_BASE_DIR
   end
   if @to_clean.length > 0
     key      = @to_clean.pop
@@ -159,7 +159,7 @@ def dry_clean_up(options)
   if options[:base_dir]
     clean_dir = "#{options[:base_dir]}/bvwack-back"
   else
-    clean_dir = DEFAULT_CONVERT_BASE_DIR
+    clean_dir = DEFAULT_CLEAN_BASE_DIR
   end
   if @to_clean.length > 0
     key      = @to_clean.pop
