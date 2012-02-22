@@ -1,44 +1,85 @@
 <DOCTYPE html>
     <html lang="en">
     <head>
-        <style type="css">
+        <title>bvwack documentation</title>
+        <style>
             body {
-                font-family: Georgia, sans-serif;
+                font-family: Geneva, Arial, sans-serif;
+                background-image: url('vichy.png');
+                background-repeat: repeat;
+            }
+
+            div.help {
+                margin: 50px;
+            }
+
+            div.indent table {
+                margin-left: 2em;
+                margin-right: 2em;
+                font-size: .8em;
+
+            }
+
+            div.indent tr {
+                padding-top: 5px;
+                padding-bottom: 5px;
             }
         </style>
     </head>
     <body>
-    <div id="help">
+    <div class="help">
 
-        Usage: bvwack
-        <options>
+        <p>Usage: bvwack options</p>
 
+        <p>Options:</p>
 
-            Default action is equivalent to bvwack -n 2
+        <div class="indent">
+            <table>
+                <tr>
+                    <td>-b BASE_DIR, --base-dir BASE_DIR</td>
+                    <td>Set BASE_DIR instead of $PWD</td>
+                </tr>
+                <tr>
+                    <td>-d, --dry-run</td>
+                    <td>Do a dry run. Prints proposed commands to STDOUT.</td>
+                </tr>
+                <tr>
+                    <td>-c, --clean-up</td>
+                    <td> Instead of converting, move all converted files to
+                        $PWD/bvwack-back/[old-path]. If used with -b files will be moved to
+                        BASE_DIR/bvwack-path/[old-path]
+                    </td>
+                </tr>
+                <tr>
+                    <td>-n #, --num-files</td>
+                    <td> # Number of videos to batch. If -n is omitted, the default is -n 2</td>
+                </tr>
+                <tr>
+                    <td>-l, --list_converted</td>
+                    <td> Lists files that have been converted but not cleaned. Useful for verifying
+                        successful
+                        conversion.
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-            Options:
-            -b BASE_DIR, --base-dir BASE_DIR Set BASE_DIR instead of /Volumes/thundar/media/video
-            -d, --dry-run Do a dry run. Prints proposed commands to STDOUT.
-            -c, --clean-up Instead of converting, move all converted files to
-            /Volumes/thundar/media/converted/[old-path]
-            -n #, --num-files # Number of videos to batch.
-            -l, --list_converted Lists files that have been converted but not cleaned. Useful for vierifying successful
-            conversion.
-
-            Notes: By default this will not work for you. You must change DEFAULT_CONVERT_BASE_DIR
-            and DEFAULT_CLEAN_BASE_DIR to something that exists on your system. Do not let
-            the clean dir be a subdirectory of base dir or you'll be sad. I have set the
-            FFMPEG options to use only 2 threads. This allows me to use my laptop while
+        <p>Notes: I have set the FFMPEG options to use only 2 threads. This allows me to use my laptop while
             converting things. If you just want to hog through video try setting -threads 0
-            in FFMPEG_OPTS. Currently this only works on UNIX-like systems.
+            in FFMPEG_OPTS. Currently bvwack only works on UNIX-like systems.</p>
 
-            Requirements: ffmpeg and a libx264-slow.ffpreset (possibly in your ~/.ffmpeg/ directory or in your Cellar if
-            you use brew.) Google is your friend.
+        <p>Requirements: ffmpeg and a libx264-slow.ffpreset (possibly in your ~/.ffmpeg/ directory or in your Cellar if
+            you use brew.) Google is your friend.</p>
 
-            Examples:
-            bvwack -dw Shows proposed commands for 2 videos
-            bvwack -w -b somedir/anotherdir -n 5 Converts 5 videos under somedir/anotherdir
-            bvwack -c -n 10 Moves 10 already converted mkv or avi files to /Volumes/thundar/medai/converted/[od-path]"
+        <p> Examples:
+
+        <div class="indent">
+        <table>
+            <tr><td>bvwack -dw</td><td>Shows proposed commands for 2 videos</td></tr>
+            <tr><td>bvwack -w -b somedir/anotherdir -n 5</td><td>Converts 5 videos under somedir/anotherdir</td></tr>
+            <tr><td>bvwack -c -n 10</td><td>Moves 10 already converted mkv or avi files to /Volumes/thundar/medai/converted/[od-path]"</td></tr>
+        </table></div>
+        </p>
 
     </div>
     </body>
