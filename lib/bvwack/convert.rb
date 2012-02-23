@@ -1,5 +1,5 @@
-require 'optparse'
 require_relative 'help'
+require_relative 'options'
 
 DEFAULT_CONVERT_BASE_DIR = "#{ENV['PWD']}"
 DEFAULT_CLEAN_BASE_DIR   = "#{ENV['PWD']}/bvwack-back"
@@ -9,36 +9,7 @@ FFMPEG_OPTS              = "-acodec aac -ac 2 -ab 160k -s 1024x768 -vcodec libx2
 @not_converted_files = { }
 @to_convert          = []
 
-options       = { }
-option_parser = OptionParser.new do |opts|
-  opts.on("-d", "--dry-run") do
-    options[:dry_run] = true
-  end
 
-  opts.on("-b BASE_DIR", "--base-dir BASE_DIR") do |base_dir|
-    options[:base_dir] = base_dir
-  end
-
-  opts.on("-c", "--clean-up") do
-    options[:clean_up] = true
-  end
-
-  opts.on("-n NUM_FILES", "--num-files NUM_FILES", Integer) do |num_files|
-    options[:num_files] = num_files
-  end
-
-  opts.on("-h", "--help") do
-    options[:help] = true
-  end
-
-  opts.on("-l", "--list-converted") do
-    options[:list_converted] = true
-  end
-
-  opts.on("-w", "--wack") do
-    options[:wack] = true
-  end
-end
 
 def echo_base_dirs(options)
   if options[:base_dir]
@@ -125,8 +96,8 @@ def clean_up(options)
     filename = @not_converted_files[key]
     dirname  = File.dirname(@not_converted_files[key])
     `mkdir -p "#{clean_dir}/#{dirname}" && mv "#{filename}" "#{clean_dir}/#{filename}"`
-  #else
-  #  puts "No more files to clean. Hooray!"
+    #else
+    #  puts "No more files to clean. Hooray!"
   end
 end
 
@@ -141,8 +112,8 @@ def dry_clean_up(options)
     filename = @not_converted_files[key]
     dirname  = File.dirname(@not_converted_files[key])
     puts %Q{mkdir -p "#{clean_dir}/#{dirname}" && mv "#{filename}" "#{clean_dir}/#{filename}"\n\n}
-  #else
-  #  puts "No more files to clean. Hooray!"
+    #else
+    #  puts "No more files to clean. Hooray!"
   end
 end
 
@@ -158,15 +129,15 @@ def list_converted
       p `ls -lh "#{converted_filename}"`
       p `ls -lh "#{old_filename}"`
       puts %Q{To test run:  open "#{converted_filename}"}
-      puts "\n\n"
+      puts "\n"
     end
   rescue
     puts("\nNothing to list")
   end
 end
 
-option_parser.parse!
-puts options.inspect
+options = GetOptions.new.put_options
+p options
 
 if options[:num_files]
   limit = (options[:num_files] - 1).to_i
