@@ -1,6 +1,7 @@
 require_relative 'help'
 require_relative 'options'
 require_relative 'lister'
+require_relative 'dryCleaner'
 
 DEFAULT_CONVERT_BASE_DIR = "#{ENV['PWD']}"
 DEFAULT_CLEAN_BASE_DIR   = "#{ENV['PWD']}/bvwack-back"
@@ -101,21 +102,7 @@ def clean_up(options)
   end
 end
 
-def dry_clean_up(options)
-  if options[:base_dir]
-    clean_dir = "#{options[:base_dir]}/bvwack-back"
-  else
-    clean_dir = DEFAULT_CLEAN_BASE_DIR
-  end
-  if @to_clean.length > 0
-    key      = @to_clean.pop
-    filename = @not_converted_files[key]
-    dirname  = File.dirname(@not_converted_files[key])
-    puts %Q{mkdir -p "#{clean_dir}/#{dirname}" && mv "#{filename}" "#{clean_dir}/#{filename}"\n\n}
-    #else
-    #  puts "No more files to clean. Hooray!"
-  end
-end
+
 
 def prep_operation(options)
   get_all_files(options)
@@ -139,7 +126,7 @@ def run(command, options, iteration_limit)
   (0..iteration_limit).each do |i|
     case
       when command == :dry_clean_up
-        dry_clean_up(options)
+        DryCleaner.new(options, @to_clean, @not_converted_files).dry_clean_up
       when command == :clean_up
         clean_up(options)
       when command == :dry_run
@@ -174,7 +161,7 @@ case
     run(:dry_run, options, iteration_limit)
   when options[:wack] == TRUE
     run(:convert, options, iteration_limit)
-      #puts "I would have run convert(file)"
+  #puts "I would have run convert(file)"
   else
     man = Help.new
     man.be_helpful
