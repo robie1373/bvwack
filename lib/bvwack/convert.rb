@@ -117,10 +117,12 @@ def dry_clean_up(options)
   end
 end
 
+def prep_operation(options)
+  get_all_files(options)
+  get_unconverted_files(@converted_files, @not_converted_files)
+  @to_clean = @not_converted_files.keys & @converted_files.keys
+end
 
-
-options = GetOptions.new.put_options
-p options
 
 def set_limit(options)
   if options[:num_files]
@@ -131,6 +133,28 @@ def set_limit(options)
   limit
 end
 
+def run(command, options, iteration_limit)
+  prep_operation(options)
+  echo_base_dirs(options)
+  (0..iteration_limit).each do |i|
+    case
+      when command == :dry_clean_up
+        dry_clean_up(options)
+      when command == :clean_up
+        clean_up(options)
+      when command == :dry_run
+        file = @to_convert[i]
+        dry_run(file)
+      when command == :convert
+        file =@to_convert[i]
+        convert(file)
+      else
+    end
+  end
+end
+
+options = GetOptions.new.put_options
+p options
 iteration_limit = set_limit(options)
 
 
@@ -138,47 +162,19 @@ case
   when options[:wack] == TRUE && options[:clean_up] == TRUE
     puts("Error! -w (--wack) and -c (--clean-up) cannot be used simultaneously.")
   when options[:list_converted] == TRUE
-    get_all_files(options)
-    get_unconverted_files(@converted_files, @not_converted_files)
-    @to_clean = @not_converted_files.keys & @converted_files.keys
+    prep_operation(options)
     #list_converted
     Lister.new(@to_clean, @converted_files, @not_converted_files).list_converted
   when options[:dry_run] == TRUE && options[:clean_up] == TRUE
-    get_all_files(options)
-    get_unconverted_files(@converted_files, @not_converted_files)
-    @to_clean = @not_converted_files.keys & @converted_files.keys
-    echo_base_dirs(options)
-    (0..iteration_limit).each do
-      dry_clean_up(options)
-    end
+    run(:dry_clean_up, options, iteration_limit)
   when options[:clean_up] == TRUE
-    get_all_files(options)
-    get_unconverted_files(@converted_files, @not_converted_files)
-    @to_clean = @not_converted_files.keys & @converted_files.keys
-    echo_base_dirs(options)
-    (0..iteration_limit).each do
-      #puts "I would have run clean_up"
-      clean_up(options)
-    end
+    run(:clean_up, options, iteration_limit)
+  #puts "I would have run clean_up"
   when options[:dry_run] == TRUE && options[:wack] == TRUE
-    get_all_files(options)
-    get_unconverted_files(@converted_files, @not_converted_files)
-    @to_clean = @not_converted_files.keys & @converted_files.keys
-    echo_base_dirs(options)
-    (0..iteration_limit).each do |i|
-      file = @to_convert[i]
-      dry_run(file)
-    end
+    run(:dry_run, options, iteration_limit)
   when options[:wack] == TRUE
-    get_all_files(options)
-    get_unconverted_files(@converted_files, @not_converted_files)
-    @to_clean = @not_converted_files.keys & @converted_files.keys
-    echo_base_dirs(options)
-    (0..iteration_limit).each do |i|
-      file = @to_convert[i]
+    run(:convert, options, iteration_limit)
       #puts "I would have run convert(file)"
-      convert(file)
-    end
   else
     man = Help.new
     man.be_helpful
