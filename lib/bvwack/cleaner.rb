@@ -15,9 +15,8 @@ class Cleaner
       key      = @to_clean_list.pop
       filename = @not_converted_list[key]
       dirname  = File.dirname(@not_converted_list[key])
-      `mkdir -p "#{@clean_dir}/#{dirname}" && mv "#{filename}" "#{@clean_dir}/#{filename}"`
-      #else
-      #  puts "No more files to clean. Hooray!"
+      #`mkdir -p "#{@clean_dir}/#{dirname}" && mv "#{filename}" "#{@clean_dir}/#{filename}"`
+      puts "I would have run clean_up"
     end
   end
 end
