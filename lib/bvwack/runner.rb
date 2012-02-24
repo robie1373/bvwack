@@ -17,12 +17,12 @@ class Runner
           DryCleaner.new(@options, @to_clean_list, @not_converted_list).dry_clean_up
         when @command == :clean_up
           Cleaner.new(@options, @to_clean_list, @not_converted_list).clean_up
-        when @command == :dry_run
+        when @command == :dry_wack
           file = @to_convert_list[i]
-          dry_run(file)
+          DryWacker.new(file).dry_wack
         when @command == :wack
           file = @to_convert_list[i]
-          Converter.new(file).wack
+          Wacker.new(file).wack
         else
       end
     end

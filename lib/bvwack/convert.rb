@@ -5,7 +5,7 @@ require_relative 'dryCleaner'
 require_relative 'cleaner'
 require_relative 'echobasedirs'
 require_relative 'runner'
-require_relative 'converter'
+require_relative 'wacker'
 
 DEFAULT_CONVERT_BASE_DIR = "#{ENV['PWD']}"
 DEFAULT_CLEAN_BASE_DIR   = "#{ENV['PWD']}/bvwack-back"
@@ -14,12 +14,6 @@ FFMPEG_OPTS              = "-acodec aac -ac 2 -ab 160k -s 1024x768 -vcodec libx2
 @converted_files     = { }
 @not_converted_files = { }
 @to_convert          = []
-
-def dry_run(path_to_file)
-  if path_to_file.class == String
-    puts "ffmpeg -i #{path_to_file} #{FFMPEG_OPTS} #{path_to_file.gsub(/mkv$|avi$/, "ipad.mp4")}\n\n"
-  end
-end
 
 def get_all_files(options)
   if options[:base_dir]
