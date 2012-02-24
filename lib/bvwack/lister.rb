@@ -1,8 +1,8 @@
 class Lister
-  def initialize(to_clean_list, converted_files_list, not_converted_files_list)
+  def initialize(to_clean_list, converted_files_list, not_converted_list)
     @to_clean_list            = to_clean_list
     @converted_files_list     = converted_files_list
-    @not_converted_files_list = not_converted_files_list
+    @not_converted_list = not_converted_list
   end
 
   def list_converted
@@ -10,8 +10,8 @@ class Lister
       while @to_clean_list
         key                = @to_clean_list.pop
         converted_filename = @converted_files_list[key]
-        old_filename       = @not_converted_files_list[key]
-        dirname            = File.dirname(@not_converted_files_list[key])
+        old_filename       = @not_converted_list[key]
+        dirname            = File.dirname(@not_converted_list[key])
         puts "\nConverted file:\n"
         puts %Q{In Directory "#{dirname}"}
         p `ls -lh "#{converted_filename}"`

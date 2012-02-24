@@ -2,6 +2,9 @@ require_relative 'help'
 require_relative 'options'
 require_relative 'lister'
 require_relative 'dryCleaner'
+require_relative 'cleaner'
+require_relative 'echobasedirs'
+require_relative 'runner'
 
 DEFAULT_CONVERT_BASE_DIR = "#{ENV['PWD']}"
 DEFAULT_CLEAN_BASE_DIR   = "#{ENV['PWD']}/bvwack-back"
@@ -11,16 +14,6 @@ FFMPEG_OPTS              = "-acodec aac -ac 2 -ab 160k -s 1024x768 -vcodec libx2
 @not_converted_files = { }
 @to_convert          = []
 
-
-def echo_base_dirs(options)
-  if options[:base_dir]
-    puts "\nOperating in #{ options[:base_dir]}"
-    puts "I will create #{ options[:base_dir]}/bvwack-back to store converted files if you use clean-up.\n\n"
-  else
-    puts "\nOperating in #{DEFAULT_CONVERT_BASE_DIR}"
-    puts "I will create #{ DEFAULT_CLEAN_BASE_DIR} to store converted files if you use clean-up.\n\n"
-  end
-end
 
 def convert(path_to_file)
   if path_to_file.class == String
@@ -86,23 +79,6 @@ def get_unconverted_files(converted_files, not_converted_files)
   end
 end
 
-def clean_up(options)
-  if options[:base_dir]
-    clean_dir = "#{options[:base_dir]}/bvwack-back"
-  else
-    clean_dir = DEFAULT_CLEAN_BASE_DIR
-  end
-  if @to_clean.length > 0
-    key      = @to_clean.pop
-    filename = @not_converted_files[key]
-    dirname  = File.dirname(@not_converted_files[key])
-    `mkdir -p "#{clean_dir}/#{dirname}" && mv "#{filename}" "#{clean_dir}/#{filename}"`
-    #else
-    #  puts "No more files to clean. Hooray!"
-  end
-end
-
-
 
 def prep_operation(options)
   get_all_files(options)
@@ -120,29 +96,11 @@ def set_limit(options)
   limit
 end
 
-def run(command, options, iteration_limit)
-  prep_operation(options)
-  echo_base_dirs(options)
-  (0..iteration_limit).each do |i|
-    case
-      when command == :dry_clean_up
-        DryCleaner.new(options, @to_clean, @not_converted_files).dry_clean_up
-      when command == :clean_up
-        clean_up(options)
-      when command == :dry_run
-        file = @to_convert[i]
-        dry_run(file)
-      when command == :convert
-        file =@to_convert[i]
-        convert(file)
-      else
-    end
-  end
-end
 
 options = GetOptions.new.put_options
 p options
 iteration_limit = set_limit(options)
+prep_operation(options)
 
 
 case
@@ -153,14 +111,14 @@ case
     #list_converted
     Lister.new(@to_clean, @converted_files, @not_converted_files).list_converted
   when options[:dry_run] == TRUE && options[:clean_up] == TRUE
-    run(:dry_clean_up, options, iteration_limit)
+    Runner.new(:dry_clean_up, options, iteration_limit, @to_clean, @not_converted_files, @to_convert).run
   when options[:clean_up] == TRUE
-    run(:clean_up, options, iteration_limit)
+    Runner.new(:clean_up, options, iteration_limit, @to_clean, @not_converted_files, @to_convert).run
   #puts "I would have run clean_up"
   when options[:dry_run] == TRUE && options[:wack] == TRUE
-    run(:dry_run, options, iteration_limit)
+    Runner.new(:dry_run, options, iteration_limit, @to_clean, @not_converted_files, @to_convert).run
   when options[:wack] == TRUE
-    run(:convert, options, iteration_limit)
+    Runner.new(:convert, options, iteration_limit, @to_clean, @not_converted_files, @to_convert).run
   #puts "I would have run convert(file)"
   else
     man = Help.new
