@@ -7,6 +7,7 @@ require_relative 'echobasedirs'
 require_relative 'runner'
 require_relative 'wacker'
 require_relative 'drywacker'
+require_relative 'limiter'
 
 DEFAULT_CONVERT_BASE_DIR = "#{ENV['PWD']}"
 DEFAULT_CLEAN_BASE_DIR   = "#{ENV['PWD']}/bvwack-back"
@@ -59,20 +60,6 @@ def prep_operation(options)
   @to_clean = @not_converted_files.keys & @converted_files.keys
 end
 
-class Limiter
-  def initialize(options)
-    @options = options
-  end
-
-  def set_limit
-    if @options[:num_files]
-      limit = (@options[:num_files] - 1).to_i
-    else
-      limit = 2
-    end
-    limit
-  end
-end
 
 
 options = GetOptions.new.put_options
