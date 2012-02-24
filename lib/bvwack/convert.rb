@@ -5,6 +5,7 @@ require_relative 'dryCleaner'
 require_relative 'cleaner'
 require_relative 'echobasedirs'
 require_relative 'runner'
+require_relative 'converter'
 
 DEFAULT_CONVERT_BASE_DIR = "#{ENV['PWD']}"
 DEFAULT_CLEAN_BASE_DIR   = "#{ENV['PWD']}/bvwack-back"
@@ -14,34 +15,11 @@ FFMPEG_OPTS              = "-acodec aac -ac 2 -ab 160k -s 1024x768 -vcodec libx2
 @not_converted_files = { }
 @to_convert          = []
 
-
-def convert(path_to_file)
-  if path_to_file.class == String
-    `ffmpeg -i "#{path_to_file}" #{FFMPEG_OPTS} "#{path_to_file.gsub(/mkv$|avi$/, "ipad.mp4")}"`
-  end
-end
-
 def dry_run(path_to_file)
   if path_to_file.class == String
     puts "ffmpeg -i #{path_to_file} #{FFMPEG_OPTS} #{path_to_file.gsub(/mkv$|avi$/, "ipad.mp4")}\n\n"
   end
 end
-
-
-def get_files(args)
-  if args[0]
-    args.each do |path|
-      if File.file?(path)
-        @paths << path
-      else
-        puts "#{path} is not a real file. Skipping. Try single-quoting the path if it is spacey or ugly."
-      end
-    end
-  else
-    puts "Specify the file(s) to convert: ./media/dir/dir/file1.mkv <'./media/dir/dir name/file(2).avi'>"
-  end
-end
-
 
 def get_all_files(options)
   if options[:base_dir]
@@ -118,7 +96,7 @@ case
   when options[:dry_run] == TRUE && options[:wack] == TRUE
     Runner.new(:dry_run, options, iteration_limit, @to_clean, @not_converted_files, @to_convert).run
   when options[:wack] == TRUE
-    Runner.new(:convert, options, iteration_limit, @to_clean, @not_converted_files, @to_convert).run
+    Runner.new(:wack, options, iteration_limit, @to_clean, @not_converted_files, @to_convert).run
   #puts "I would have run convert(file)"
   else
     man = Help.new

@@ -20,9 +20,9 @@ class Runner
         when @command == :dry_run
           file = @to_convert_list[i]
           dry_run(file)
-        when @command == :convert
+        when @command == :wack
           file = @to_convert_list[i]
-          convert(file)
+          Converter.new(file).wack
         else
       end
     end
