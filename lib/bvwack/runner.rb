@@ -6,10 +6,12 @@ class Runner
     @to_clean_list      = to_clean_list
     @not_converted_list = not_converted_list
     @to_convert_list    = to_convert_list
+
   end
 
   def run
-
+    #puts "@command #{@command}\n"
+    #puts "@command #{@command}\n@options #{@options}\n\n@iteration_limit #{@iteration_limit}\n\n@to_clean_list #{@to_clean_list}\n\n@not_converted_list #{@not_converted_list}\n\n@to_convert_list #{@to_convert_list}"
     EchoBaseDirs.new(@options).echo_base_dirs
     (0..@iteration_limit).each do |i|
       case

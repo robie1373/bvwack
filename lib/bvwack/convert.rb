@@ -1,11 +1,12 @@
 require_relative 'help'
 require_relative 'options'
 require_relative 'lister'
-require_relative 'dryCleaner'
+require_relative 'drycleaner'
 require_relative 'cleaner'
 require_relative 'echobasedirs'
 require_relative 'runner'
 require_relative 'wacker'
+require_relative 'drywacker'
 
 DEFAULT_CONVERT_BASE_DIR = "#{ENV['PWD']}"
 DEFAULT_CLEAN_BASE_DIR   = "#{ENV['PWD']}/bvwack-back"
@@ -58,20 +59,26 @@ def prep_operation(options)
   @to_clean = @not_converted_files.keys & @converted_files.keys
 end
 
-
-def set_limit(options)
-  if options[:num_files]
-    limit = (options[:num_files] - 1).to_i
-  else
-    limit = 2
+class Limiter
+  def initialize(options)
+    @options = options
   end
-  limit
+
+  def set_limit
+    if @options[:num_files]
+      limit = (@options[:num_files] - 1).to_i
+    else
+      limit = 2
+    end
+    limit
+  end
 end
 
 
 options = GetOptions.new.put_options
 p options
-iteration_limit = set_limit(options)
+iteration_limit = Limiter.new(options).set_limit
+#p iteration_limit
 prep_operation(options)
 
 
@@ -88,7 +95,7 @@ case
     Runner.new(:clean_up, options, iteration_limit, @to_clean, @not_converted_files, @to_convert).run
   #puts "I would have run clean_up"
   when options[:dry_run] == TRUE && options[:wack] == TRUE
-    Runner.new(:dry_run, options, iteration_limit, @to_clean, @not_converted_files, @to_convert).run
+    Runner.new(:dry_wack, options, iteration_limit, @to_clean, @not_converted_files, @to_convert).run
   when options[:wack] == TRUE
     Runner.new(:wack, options, iteration_limit, @to_clean, @not_converted_files, @to_convert).run
   #puts "I would have run convert(file)"
