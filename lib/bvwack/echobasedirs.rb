@@ -1,16 +1,24 @@
-
 class EchoBaseDirs
   def initialize(options)
     @options = options
   end
 
-def echo_base_dirs
-  if @options[:base_dir]
-    puts "\nOperating in #{ @options[:base_dir]}"
-    puts "I will create #{ @options[:base_dir]}/bvwack-back to store converted files if you use clean-up.\n\n"
-  else
-    puts "\nOperating in #{DEFAULT_CONVERT_BASE_DIR}"
-    puts "I will create #{ DEFAULT_CLEAN_BASE_DIR} to store converted files if you use clean-up.\n\n"
+  def echo_base_dirs
+    if @options[:base_dir]
+      puts "\nOperating in #{ @options[:base_dir]}"
+      puts "I will create #{ @options[:base_dir]}/bvwack-back to store converted files if you use clean-up.\n\n"
+    else
+      puts "\nOperating in #{DEFAULT_CONVERT_BASE_DIR}"
+      puts "I will create #{ DEFAULT_CLEAN_BASE_DIR} to store converted files if you use clean-up.\n\n"
+    end
   end
-end
+
+  def base_convert_dir
+    if @options[:base_dir]
+      base_dir = @options[:base_dir]
+    else
+      base_dir = DEFAULT_CONVERT_BASE_DIR
+    end
+    base_dir
+  end
 end

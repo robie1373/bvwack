@@ -1,10 +1,14 @@
 require_relative 'bvwack_version'
+
+include BVWack
+
 class Help
+
   def be_helpful
     puts "
   Usage: bvwack <options>
 
-  version #{VERSION}
+  version #{BVWack::VERSION}
 
   Default action is equivalent to bvwack -n 2
 
