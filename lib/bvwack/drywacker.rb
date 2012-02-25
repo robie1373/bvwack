@@ -1,28 +1,31 @@
 module BVWack
   class DryWacker
-    def initialize(list, iteration)
-      @list = list
-      @iteration = iteration
+    def initialize(args)
+      @lists     = args[:lists]
+      @iteration = args[:iteration]
+      @file_obj  = args[:file_obj]
     end
 
-    def list
-      @list
+    def dry_wack
+      if file_obj.path_to_file(iteration).class == String
+        puts "ffmpeg -i #{file_obj.path_to_file(iteration)} #{FFMPEG_OPTS} #{file_obj.path_to_file(iteration).gsub(/mkv$|avi$/, "ipad.mp4")}\n\n"
+      end
+    end
+
+    def file_obj
+      @file_obj
+    end
+
+    def lists
+      @lists
     end
 
     def iteration
       @iteration
     end
 
-    def path_to_file
-      list[:to_convert][iteration]
-    end
-
-    def dry_wack
-      #print "@path_to_file "
-      #p @path_to_file
-      if path_to_file.class == String
-        puts "ffmpeg -i #{path_to_file} #{FFMPEG_OPTS} #{path_to_file.gsub(/mkv$|avi$/, "ipad.mp4")}\n\n"
-      end
-    end
+    #def file_obj.path_to_file(iteration)
+    #  lists[:to_convert][iteration]
+    #end
   end
 end
