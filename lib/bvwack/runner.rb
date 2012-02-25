@@ -10,17 +10,17 @@ class Runner
   end
 
   def run
-    base_dirs = EchoBaseDirs.new(options)
-    base_dirs.echo_base_dirs
+    #base_dirs = EchoBaseDirs.new(options)
+    base_dir.echo_base_dirs
     (0..iteration_limit).each do |i|
       case
         when command == :list_converted
-          Lister.new(:lists => lists, :base_dir => base_dirs.base_convert_dir, :file_obj => file_obj).list_converted
+          Lister.new(:lists => lists, :base_dir => base_dir, :file_obj => file_obj).list_converted
         when command == :dry_clean_up
-          DryCleaner.new(:options => options, :lists => lists, :file_obj => file_obj).dry_clean_up
+          DryCleaner.new(:options => options, :lists => lists, :file_obj => file_obj, :base_dir => base_dir).dry_clean_up
 
         when command == :clean_up
-          Cleaner.new(:options => options, :lists => lists, :file_obj => file_obj).clean_up
+          Cleaner.new(:options => options, :lists => lists, :file_obj => file_obj, :base_dir => base_dir).clean_up
 
         when command == :dry_wack
           DryWacker.new(:lists => lists, :iteration => i, :file_obj => file_obj).dry_wack
@@ -30,6 +30,12 @@ class Runner
       end
     end
   end
+
+  def base_dir
+    base_dir = EchoBaseDirs.new(options)
+  end
+
+
 
   def file_obj
     @file_obj

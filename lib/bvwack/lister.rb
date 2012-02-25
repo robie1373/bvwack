@@ -18,7 +18,7 @@ class Lister
         puts %Q{In Directory "#{dirname}"}
         p `ls -lh "#{converted_filename}"`
         p `ls -lh "#{not_converted_filename}"`
-        puts %Q{To test run:  open "#{File.join(base_dir, converted_filename)}"}
+        puts %Q{To test run:  open "#{File.join(base_convert_dir, converted_filename)}"}
         puts "\n"
       end
     rescue
@@ -32,6 +32,10 @@ class Lister
 
   def base_dir
     @base_dir
+  end
+
+  def base_convert_dir
+    base_dir.base_convert_dir
   end
 
   def to_clean_list

@@ -24,7 +24,7 @@ class FileListGetter
       end
     end
 
-    puts "filelistgetter#get_all_files extension_grep_pattern #{extension_grep_pattern}"
+    #puts "filelistgetter#get_all_files extension_grep_pattern #{extension_grep_pattern}"
     not_converted_files = Dir.glob(File.join("**", "*.{#{extension_grep_pattern}}"))
     not_converted_files.each do |i|
       if i.include?("bvwack-back")
