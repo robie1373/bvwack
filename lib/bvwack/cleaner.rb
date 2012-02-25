@@ -1,15 +1,19 @@
 module BVWack
   class Cleaner
-    def initialize(options_list, lists)
-      @options_list       = options_list
-      #@to_clean_list      = to_clean_list
-      #@not_converted_list = not_converted_list
-      @lists = lists
-      if @options_list[:base_dir]
-        @clean_dir = "#{@options_list[:base_dir]}/bvwack-back"
+    def initialize(args)
+      @options = args[:options]
+      @lists        = args[:lists]
+      @file_obj     = args[:file_obj]
+      if @options[:base_dir]
+        @clean_dir = "#{@options[:base_dir]}/bvwack-back"
       else
         @clean_dir = DEFAULT_CLEAN_BASE_DIR
       end
+
+    end
+
+    def file_obj
+      FileObj.new(:not_converted_list => not_converted_list, :to_clean_list => to_clean_list)
     end
 
     def clean_dir
@@ -30,12 +34,38 @@ module BVWack
 
     def clean_up
       if to_clean_list.length > 0
-        key      = to_clean_list.pop
-        filename = not_converted_list[key]
-        dirname  = File.dirname(not_converted_list[key])
         #`mkdir -p "#{clean_dir}/#{dirname}" && mv "#{filename}" "#{clean_dir}/#{filename}"`
-        puts %Q{I would have run clean_up\n\tmkdir -p #{clean_dir}/#{dirname}" && mv "#{filename}" "#{clean_dir}/#{filename}}
+        puts %Q{I would have run clean_up\n\tmkdir -p #{clean_dir}/#{file_obj.dirname}" && mv "#{file_obj.filename}" "#{clean_dir}/#{file_obj.filename}}
       end
+    end
+
+    class FileObj
+      def initialize(args)
+        @not_converted_list = args[:not_converted_list]
+        @to_clean_list      = args[:to_clean_list]
+      end
+
+      def not_converted_list
+        @not_converted_list
+      end
+
+      def to_clean_list
+        @to_clean_list
+      end
+
+      def dirname
+        File.dirname(not_converted_list[key])
+      end
+
+      def filename
+        not_converted_list[key]
+      end
+
+      def key
+        to_clean_list.pop
+      end
+
+      private :not_converted_list, :to_clean_list
     end
   end
 end
