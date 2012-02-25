@@ -4,6 +4,7 @@ module BVWack
       @options         = options
       @iteration_limit = iteration_limit
       @lists           = lists
+      #puts "actionator#init @lists[:to_clean_list] #{@lists[:to_clean]}"
     end
 
     def options

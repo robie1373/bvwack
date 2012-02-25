@@ -17,4 +17,5 @@ print "Command line options: #{options}\n"
 iteration_limit     = Limiter.new(options).set_limit
 file_list_getter    = FileListGetter.new(options)
 lists = file_list_getter.lists
+#puts "bvwack lists #{lists[:to_clean]}"
 Actionator.new(options, lists, iteration_limit).actionate

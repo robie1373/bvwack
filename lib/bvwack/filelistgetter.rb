@@ -5,6 +5,7 @@
       @not_converted_files = { }
       @to_convert          = []
       get_all_files
+      #puts "filelistgetter#init to_clean_list #{to_clean}"
     end
 
     def get_all_files

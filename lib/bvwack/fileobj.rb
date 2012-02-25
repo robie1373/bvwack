@@ -5,6 +5,7 @@ class FileObj
     @to_convert         = args[:to_convert]
   end
 
+  #TODO rename not_converted_list to original_file_list
   def not_converted_list
     @not_converted_list
   end
@@ -31,6 +32,15 @@ class FileObj
 
   def key
     to_clean_list.pop
+  end
+
+  def converted_filename
+    converted_file_list[key]
+  end
+
+  #TODO rename not_converted_filename to original_filename
+  def not_converted_filename
+    not_converted_list[key]
   end
 
   private :not_converted_list, :to_clean_list
