@@ -1,4 +1,6 @@
 require_relative 'bvwack_version'
+include BVWack
+
 class Help
   def be_helpful
     puts "
