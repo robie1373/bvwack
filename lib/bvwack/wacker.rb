@@ -1,7 +1,21 @@
 class Wacker
-  def initialize(list, iteration)
-    @list = list
-    @iteration = iteration
+  def initialize(args)
+    @list      = args[:lists]
+    @iteration = args[:iteration]
+    @file_obj  = args[:file_obj]
+  end
+
+  def wack
+    if file_obj.path_to_file(iteration).class == String
+      $PROGRAM_NAME = "bvwack #{File.basename(file_obj.path_to_file(iteration))}"
+
+      #`ffmpeg -i "#{file_obj.path_to_file(iteration)}" #{FFMPEG_OPTS} "#{file_obj.path_to_file(iteration).gsub(/mkv$|avi$/, "ipad.mp4")}"`
+      puts %Q{I would have run\n\tffmpeg -i "#{file_obj.path_to_file(iteration)}" #{FFMPEG_OPTS} "#{file_obj.path_to_file(iteration).gsub(/mkv$|avi$/, "ipad.mp4")}"}
+    end
+  end
+
+  def file_obj
+    @file_obj
   end
 
   def iteration
@@ -12,16 +26,7 @@ class Wacker
     @list
   end
 
-  def path_to_file
-    list[:to_convert][iteration]
-  end
-
-  def wack
-    if path_to_file.class == String
-      $PROGRAM_NAME = "bvwack #{File.basename(path_to_file)}"
-
-      #`ffmpeg -i "#{path_to_file}" #{FFMPEG_OPTS} "#{path_to_file.gsub(/mkv$|avi$/, "ipad.mp4")}"`
-      puts %Q{I would have run\n\tffmpeg -i "#{path_to_file}" #{FFMPEG_OPTS} "#{path_to_file.gsub(/mkv$|avi$/, "ipad.mp4")}"}
-    end
-  end
+  #def path_to_file
+  #  list[:to_convert][iteration]
+  #end
 end
