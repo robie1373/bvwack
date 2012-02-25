@@ -1,16 +1,18 @@
 require_relative 'fileobj'
+require_relative 'filelistgetter'
+require_relative 'limiter'
+require_relative 'echobasedirs'
+
+
 class Runner
   def initialize(args)
-    @command         = args[:command]
-    @options         = args[:options]
-    @iteration_limit = args[:iteration_limit]
-    @lists           = args[:lists]
-    @file_obj        = FileObj.new(:not_converted_list => @lists[:not_converted_list], :to_clean_list => @lists[:to_clean_list], :to_convert => @lists[:to_convert] )
-    #puts "runner#init @lists[:to_clean_list] #{@lists[:to_clean]}"
+    @command = args[:command]
+    @options = args[:options]
+    puts "Runner#init lists #{lists}"
+    puts "runner#init lists[:not_converted] #{lists[:not_converted_files]}"
   end
 
   def run
-    #base_dirs = EchoBaseDirs.new(options)
     base_dir.echo_base_dirs
     (0..iteration_limit).each do |i|
       case
@@ -32,13 +34,19 @@ class Runner
   end
 
   def base_dir
-    base_dir = EchoBaseDirs.new(options)
+    EchoBaseDirs.new(:options => options)
   end
 
-
-
   def file_obj
-    @file_obj
+    FileObj.new(:lists => @lists)
+  end
+
+  def iteration_limit
+    Limiter.new(:options => options).set_limit
+  end
+
+  def lists
+    FileListGetter.new(:options => options, :base_dir => base_dir)
   end
 
   def command
@@ -47,13 +55,5 @@ class Runner
 
   def options
     @options
-  end
-
-  def iteration_limit
-    @iteration_limit
-  end
-
-  def lists
-    @lists
   end
 end
