@@ -13,3 +13,33 @@ require_relative '../lib/bvwack/lister'
 require_relative '../lib/bvwack/options'
 require_relative '../lib/bvwack/runner'
 require_relative '../lib/bvwack/wacker'
+
+def spec_lists
+  { :converted_files => spec_converted_files, :not_converted_files => spec_not_converted_files, :to_convert => spec_to_convert, :to_clean => spec_to_clean }
+end
+
+def spec_not_converted_files
+  { "dir1/file1" => "dir1/file1.avi", "dir1/dir2/file1" => "dir1/dir2/file1.mkv", "dir1/file2" => "dir1/file2.mkv"}
+end
+
+def spec_converted_files
+  { "dir1/file1" => "dir1/file1.ipad.mp4", "dir1/dir2/file1" => "dir1/dir2/file1.ipad.mp4", "dir1/file2" => "dir1/file2.ipad.mp4"}
+end
+
+def spec_to_convert
+  %w{ dir1/file1 dir1/dir2/file1 }
+end
+
+def spec_to_clean
+  %w{ dir1/file2 }
+end
+
+class SpecBaseDirs
+  def base_convert_dir
+    "foo/bar"
+  end
+
+  def base_clean_dir
+    "foo/bar/bvwack-back"
+  end
+end

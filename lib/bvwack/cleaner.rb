@@ -1,7 +1,7 @@
 module BVWack
   class Cleaner
     def initialize(args)
-      @options  = args[:options]
+      #@options  = args[:options]
       @lists    = args[:lists]
       @file_obj = args[:file_obj]
       @base_dir = args[:base_dir]

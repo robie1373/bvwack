@@ -22,7 +22,7 @@ class Runner
           DryCleaner.new(:options => options, :lists => lists, :file_obj => file_obj, :base_dir => base_dir).dry_clean_up
 
         when command == :clean_up
-          Cleaner.new(:options => options, :lists => lists, :file_obj => file_obj, :base_dir => base_dir).clean_up
+          Cleaner.new(:lists => lists, :file_obj => file_obj, :base_dir => base_dir).clean_up
 
         when command == :dry_wack
           DryWacker.new(:lists => lists, :iteration => i, :file_obj => file_obj).dry_wack
