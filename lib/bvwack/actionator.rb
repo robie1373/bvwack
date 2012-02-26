@@ -1,9 +1,11 @@
 require_relative 'help'
 require_relative 'runner'
+require_relative 'options'
 
 class Actionator
-  def initialize(args)
-    @options = args[:options]
+  def initialize
+    @options = GetOptions.new.put_options
+    print "Command line options: #{@options}\n"
   end
 
   def actionate

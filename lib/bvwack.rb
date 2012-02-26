@@ -1,4 +1,4 @@
-require_relative 'bvwack/options'
+#require_relative 'bvwack/options'
 require_relative 'bvwack/actionator'
 
 #require_relative 'bvwack/lister'
@@ -14,8 +14,7 @@ require_relative 'bvwack/actionator'
 #require_relative 'bvwack/fileobj'
 #require_relative 'bvwack/help'
 
-options = GetOptions.new.put_options
-print "Command line options: #{options}\n"
+
 #file_obj = FileObj.new(lists)
 #puts "bvwack lists #{lists[:to_clean]}"
-Actionator.new(:options => options).actionate
+Actionator.new.actionate

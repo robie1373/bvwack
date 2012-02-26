@@ -9,10 +9,10 @@ class Lister
     #puts "lister#list_converted to_clean_list #{to_clean_list}  "
     begin
       while to_clean_list
-        key                   = to_clean_list.pop
-        converted_filename    = converted_file_list[key]
+        key                    = to_clean_list.pop
+        converted_filename     = converted_file_list[key]
         not_converted_filename = not_converted_list[key]
-        dirname               = File.dirname(not_converted_list[key])
+        dirname                = File.dirname(not_converted_list[key])
         puts "\nConverted file:\n"
         #p file_obj
         puts %Q{In Directory "#{dirname}"}
@@ -24,6 +24,10 @@ class Lister
     rescue
       puts("\nNothing to list")
     end
+  end
+
+  def lists
+    @lists
   end
 
   def file_obj
@@ -52,4 +56,5 @@ class Lister
     #{ "abc" => "cde"}
   end
 
+  private :file_obj, :base_dir, :lists, :base_convert_dir, :converted_file_list, :to_clean_list, :not_converted_list
 end

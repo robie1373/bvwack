@@ -66,6 +66,12 @@ class FileListGetter
     end
   end
 
+  def lists
+    { :converted_files => converted_files, :not_converted_files => not_converted_files, :to_convert => get_unconverted_files, :to_clean => to_clean }
+  end
+
+
+  private :to_clean, :options, :get_unconverted_files, :not_converted_files, :converted_files, :ext_grep_pattern, :file_formats, :get_converted_files, :get_original_files
 
   def file_formats
     INPUT_FILE_FORMATS
@@ -95,10 +101,6 @@ class FileListGetter
     not_converted_files.keys & converted_files.keys
   end
 
-  def lists
-    { :converted_files => converted_files, :not_converted_files => not_converted_files, :to_convert => get_unconverted_files, :to_clean => to_clean }
-  end
-
   def base_dir
     @base_dir
   end
@@ -107,5 +109,4 @@ class FileListGetter
     @options
   end
 
-  private :to_clean, :options, :get_unconverted_files, :not_converted_files, :converted_files, :ext_grep_pattern, :file_formats, :get_converted_files, :get_original_files
 end
