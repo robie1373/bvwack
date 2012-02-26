@@ -19,11 +19,11 @@ def spec_lists
 end
 
 def spec_not_converted_files
-  { "dir1/file1" => "dir1/file1.avi", "dir1/dir2/file1" => "dir1/dir2/file1.mkv", "dir1/file2" => "dir1/file2.mkv"}
+  { "dir1/file1" => "dir1/file1.avi", "dir1/dir2/file1" => "dir1/dir2/file1.mkv", "dir1/file2" => "dir1/file2.mkv" }
 end
 
 def spec_converted_files
-  { "dir1/file1" => "dir1/file1.ipad.mp4", "dir1/dir2/file1" => "dir1/dir2/file1.ipad.mp4", "dir1/file2" => "dir1/file2.ipad.mp4"}
+  { "dir1/file1" => "dir1/file1.ipad.mp4", "dir1/dir2/file1" => "dir1/dir2/file1.ipad.mp4", "dir1/file2" => "dir1/file2.ipad.mp4" }
 end
 
 def spec_to_convert
@@ -43,3 +43,27 @@ class SpecBaseDirs
     "foo/bar/bvwack-back"
   end
 end
+
+class SpecFileObj
+  def initialize(lists)
+    @lists = lists
+  end
+
+  def dirname
+    "dir1/file1"
+  end
+
+  def filename
+    "dir1/file1.avi"
+  end
+
+  def path_to_file(iteration)
+    spec_to_convert[iteration]
+    #"dir1/file1"
+  end
+
+  def key
+    "dir1/file2"
+  end
+end
+

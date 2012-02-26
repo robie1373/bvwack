@@ -5,13 +5,9 @@ class EchoBaseDirs
 
   def echo_base_dirs
     if options[:base_dir]
-      #puts "hello"
-      puts "\nOperating in #{ options[:base_dir]}"
-      puts "I will create #{ File.join(options[:base_dir], "bvwack-back")} to store converted files if you use clean-up.\n\n"
+      p "\nOperating in #{ options[:base_dir]}\nI will create #{ File.join(options[:base_dir], "bvwack-back")} to store converted files if you use clean-up.\n\n"
     else
-      #puts "hello"
-      puts "\nOperating in #{DEFAULT_CONVERT_BASE_DIR}"
-      puts "I will create #{ DEFAULT_CLEAN_BASE_DIR} to store converted files if you use clean-up.\n\n"
+      p "\nOperating in #{DEFAULT_CONVERT_BASE_DIR}\nI will create #{ DEFAULT_CLEAN_BASE_DIR} to store converted files if you use clean-up.\n\n"
     end
   end
 
@@ -38,3 +34,13 @@ class EchoBaseDirs
     @options
   end
 end
+
+#class Putter
+#  def initialize
+#    @output = STDOUT
+#  end
+#
+#  def start
+#    p "i put"
+#  end
+#end

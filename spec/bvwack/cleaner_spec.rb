@@ -4,20 +4,33 @@ require_relative '../spec_helper'
 describe Cleaner do
 
   before :each do
-    spec_file_obj = double(FileObj.new(:lists => spec_lists))
-    spec_base_dirs = SpecBaseDirs.new
-    @cleaner        = Cleaner.new(:lists => spec_lists, :file_obj => spec_file_obj, :base_dir => spec_base_dirs)
+    #@file_obj  = double(FileObj.new(:lists => spec_lists))
+    @file_obj  = SpecFileObj.new(spec_lists)
+    @base_dirs = SpecBaseDirs.new
+    @cleaner   = Cleaner.new(:lists => spec_lists, :file_obj => @file_obj, :base_dir => @base_dirs)
+    @mv_string = %Q{mkdir -p "#{File.join(@base_dirs.base_clean_dir, @file_obj.dirname)}" && mv "#{@file_obj.filename} #{File.join(@base_dirs.base_clean_dir, @file_obj.filename)}"}
+
   end
 
   describe "#clean_up" do
     it "should write the clean_up command string to STDOUT" do
-      pending "track down the issue with @cleaner"
-      @cleaner.clean_up.should be_a(String)
+      #@cleaner.clean_up.should == `#{@mv_string}`
+      @cleaner.clean_up.should == "I would have run clean_up\n\t#{@mv_string}"
     end
 
-    it "tells me if spec_lists is in scope" do
-      pending "to help track down the problem above. Not a real test."
-      spec_lists[:not_converted_files].should == {}
-    end
+    #it "tells me if spec_lists is in scope" do
+    #  pending "to help track down the problem above. Not a real test."
+    #  spec_lists[:not_converted_files].should == { }
+    #end
+    #
+    #it "tells me if spec_file_obj is working (not a real test)" do
+    #  pending "to help track down problem above. not a real test."
+    #  @file_obj.should == ""
+    #end
+    #
+    #it "tells me if spec_base_dirs is working. Not a real test" do
+    #  pending "to help track down the problem above. Not a real test."
+    #  @base_dirs.base_clean_dir.should == ""
+    #end
   end
 end

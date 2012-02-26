@@ -8,11 +8,15 @@ module BVWack
 
     def dry_wack
       if file_obj.path_to_file(iteration).class == String
-        puts "ffmpeg -i #{file_obj.path_to_file(iteration)} #{FFMPEG_OPTS} #{file_obj.path_to_file(iteration).gsub(/mkv$|avi$/, "ipad.mp4")}\n\n"
+        p "#{ffmpeg_string}\n\n"
       end
     end
 
     private
+    def ffmpeg_string
+      %Q{ffmpeg -i "#{file_obj.path_to_file(iteration)}" #{FFMPEG_OPTS} "#{file_obj.path_to_file(iteration).gsub(/mkv$|avi$/, "ipad.mp4")}"}
+    end
+
     def file_obj
       @file_obj
     end

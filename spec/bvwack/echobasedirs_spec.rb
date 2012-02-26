@@ -5,6 +5,20 @@ require 'optparse'
 
 describe EchoBaseDirs do
 
+  #describe Putter do
+  #  describe "#start" do
+  #    it "should say i put" do
+  #      output = double('output')
+  #      putter = Putter.new
+  #      putter.start.should == "i put"
+        #output.should_receive(:p).with('i put')
+
+        #putter.start
+      #end
+    #end
+  #end
+
+
   describe "with -b option set" do
     before :each do
       @options      = { }
@@ -15,7 +29,6 @@ describe EchoBaseDirs do
       end
       option_parser.parse!(['-b foo/bar'])
       @base_dir = EchoBaseDirs.new(:options => @options)
-      #let(:output) { double('output').as_null_object }
     end
 
     #it "testing if @options looks right this is not a real test. Just me understanding if I set up the before :each correctly" do
@@ -35,11 +48,7 @@ describe EchoBaseDirs do
 
     describe "#echo_base_dirs" do
       it "should puts the correct messages" do
-        pending "figure out how should_receive works or another way to test this"
-        output = double('output')
-        @base_dir.echo_base_dirs
-        output.should_receive(:echo_base_dirs).with("hello")
-        #output.should_receive(:puts).with("\nOperating in foo/bar\nI will create foo/bar/bvwack-back to store converted files if you use clean-up.\n\n")
+        EchoBaseDirs.new(:options => @options).echo_base_dirs.should == "\nOperating in  foo/bar\nI will create #{ File.join(@options[:base_dir], "bvwack-back")} to store converted files if you use clean-up.\n\n"
       end
     end
   end
@@ -71,11 +80,7 @@ describe EchoBaseDirs do
 
     describe "#echo_base_dirs" do
       it "should puts the correct messages" do
-        pending "figure out how should_receive works or another way to test this"
-        output = double('output')
-        @base_dir.echo_base_dirs
-        output.should_receive(:echo_base_dirs).with("hello")
-        #output.should_receive(:puts).with("\nOperating in foo/bar\nI will create foo/bar/bvwack-back to store converted files if you use clean-up.\n\n")
+        EchoBaseDirs.new(:options => @options).echo_base_dirs.should == "\nOperating in #{DEFAULT_CONVERT_BASE_DIR}\nI will create #{ DEFAULT_CLEAN_BASE_DIR} to store converted files if you use clean-up.\n\n"
       end
     end
   end

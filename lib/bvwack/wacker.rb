@@ -7,14 +7,17 @@ class Wacker
 
   def wack
     if file_obj.path_to_file(iteration).class == String
-      $PROGRAM_NAME = "bvwack #{File.basename(file_obj.path_to_file(iteration))}"
 
-      #`ffmpeg -i "#{file_obj.path_to_file(iteration)}" #{FFMPEG_OPTS} "#{file_obj.path_to_file(iteration).gsub(/mkv$|avi$/, "ipad.mp4")}"`
-      puts %Q{I would have run\n\tffmpeg -i "#{file_obj.path_to_file(iteration)}" #{FFMPEG_OPTS} "#{file_obj.path_to_file(iteration).gsub(/mkv$|avi$/, "ipad.mp4")}"}
+      #`#{ffmpeg_string}`
+      p "I would have run\n\t#{ffmpeg_string}"
     end
   end
 
   private
+  def ffmpeg_string
+    %Q{ffmpeg -i "#{file_obj.path_to_file(iteration)}" #{FFMPEG_OPTS} "#{file_obj.path_to_file(iteration).gsub(/mkv$|avi$/, "ipad.mp4")}"}
+  end
+
   def file_obj
     @file_obj
   end
