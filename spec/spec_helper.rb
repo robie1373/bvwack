@@ -67,3 +67,7 @@ class SpecFileObj
   end
 end
 
+def commands
+  [:list_converted, :dry_clean_up, :clean_up, :dry_wack, :wack]
+end
+

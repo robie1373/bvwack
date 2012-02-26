@@ -8,8 +8,8 @@ class Runner
   def initialize(args)
     @command = args[:command]
     @options = args[:options]
-    puts "Runner#init lists #{lists}"
-    puts "runner#init lists[:not_converted] #{lists[:not_converted_files]}"
+    #puts "Runner#init lists #{lists}"
+    #puts "runner#init lists[:not_converted] #{lists[:not_converted_files]}"
   end
 
   def run
@@ -35,6 +35,7 @@ class Runner
     end
   end
 
+  private
   def base_dir
     EchoBaseDirs.new(:options => options)
   end
