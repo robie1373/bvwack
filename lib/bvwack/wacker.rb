@@ -14,6 +14,7 @@ class Wacker
     end
   end
 
+  private
   def file_obj
     @file_obj
   end
@@ -25,8 +26,4 @@ class Wacker
   def list
     @list
   end
-
-  #def path_to_file
-  #  list[:to_convert][iteration]
-  #end
 end

@@ -71,8 +71,7 @@ class FileListGetter
   end
 
 
-  private :to_clean, :options, :get_unconverted_files, :not_converted_files, :converted_files, :ext_grep_pattern, :file_formats, :get_converted_files, :get_original_files
-
+  private
   def file_formats
     INPUT_FILE_FORMATS
   end
@@ -89,6 +88,7 @@ class FileListGetter
     @not_converted_files = { }
   end
 
+  #TODO this may be broken. It uses instance variables, and does not pass in appropriate things.
   def get_unconverted_files
     @to_convert = []
     (@not_converted_files.keys - @converted_files.keys).each do |key|

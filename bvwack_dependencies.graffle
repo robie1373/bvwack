@@ -51,18 +51,20 @@
 	<array>
 		<dict>
 			<key>Bounds</key>
-			<string>{{231.87766, 446.58185}, {227.69649, 15}}</string>
+			<string>{{708.99664, 59.105804}, {74.006752, 15}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>Head</key>
 			<dict>
 				<key>ID</key>
-				<integer>23</integer>
+				<integer>111</integer>
+				<key>Info</key>
+				<integer>3</integer>
 			</dict>
 			<key>ID</key>
-			<integer>88</integer>
+			<integer>112</integer>
 			<key>Rotation</key>
-			<real>221.89498901367188</real>
+			<real>179.225830078125</real>
 			<key>Shape</key>
 			<string>AdjustableArrow</string>
 			<key>ShapeData</key>
@@ -126,9 +128,187 @@
 			<key>Tail</key>
 			<dict>
 				<key>ID</key>
+				<integer>110</integer>
+			</dict>
+			<key>TextRelativeArea</key>
+			<string>{{0.125, 0.25}, {0.75, 0.5}}</string>
+			<key>isConnectedShape</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{630, 28.999947}, {79, 76.211662}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>111</integer>
+			<key>Magnets</key>
+			<array>
+				<string>{0, 1}</string>
+				<string>{0, -1}</string>
+				<string>{1, 0}</string>
+				<string>{-1, 0}</string>
+			</array>
+			<key>Shape</key>
+			<string>Circle</string>
+			<key>Style</key>
+			<dict/>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf320
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs20 \cf0 Is depended on\
+If this changes...}</string>
+				<key>VerticalPad</key>
+				<integer>0</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>ID</key>
+					<integer>109</integer>
+					<key>Points</key>
+					<array>
+						<string>{820.98071, 104.21161}</string>
+						<string>{862, 104.21161}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>LineType</key>
+							<integer>1</integer>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{783, 28.000004}, {79, 76.211662}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>110</integer>
+					<key>Magnets</key>
+					<array>
+						<string>{0, 1}</string>
+						<string>{0, -1}</string>
+						<string>{1, 0}</string>
+						<string>{-1, 0}</string>
+					</array>
+					<key>Shape</key>
+					<string>Circle</string>
+					<key>Style</key>
+					<dict/>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf320
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs20 \cf0 depends on\
+\'85This breaks}</string>
+						<key>VerticalPad</key>
+						<integer>0</integer>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>108</integer>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{233.20163, 446.58188}, {226.56781, 15}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
 				<integer>97</integer>
-				<key>Info</key>
-				<integer>4</integer>
+			</dict>
+			<key>ID</key>
+			<integer>88</integer>
+			<key>Rotation</key>
+			<real>42.151554107666016</real>
+			<key>Shape</key>
+			<string>AdjustableArrow</string>
+			<key>ShapeData</key>
+			<dict>
+				<key>ratio</key>
+				<real>0.32189163565635681</real>
+				<key>width</key>
+				<real>14.973806381225586</real>
+			</dict>
+			<key>Style</key>
+			<dict>
+				<key>fill</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>a</key>
+						<string>0.1</string>
+						<key>b</key>
+						<string>0</string>
+						<key>g</key>
+						<string>0</string>
+						<key>r</key>
+						<string>0</string>
+					</dict>
+					<key>MiddleFraction</key>
+					<real>0.70634919404983521</real>
+				</dict>
+				<key>shadow</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>a</key>
+						<string>0.4</string>
+						<key>b</key>
+						<string>0</string>
+						<key>g</key>
+						<string>0</string>
+						<key>r</key>
+						<string>0</string>
+					</dict>
+					<key>Fuzziness</key>
+					<real>0.0</real>
+					<key>ShadowVector</key>
+					<string>{0, 2}</string>
+				</dict>
+				<key>stroke</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>a</key>
+						<string>0.75</string>
+						<key>b</key>
+						<string>0</string>
+						<key>g</key>
+						<string>0</string>
+						<key>r</key>
+						<string>0</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>24</integer>
 			</dict>
 			<key>TextRelativeArea</key>
 			<string>{{0.125, 0.25}, {0.75, 0.5}}</string>
@@ -143,14 +323,12 @@
 			<key>Head</key>
 			<dict>
 				<key>ID</key>
-				<integer>24</integer>
-				<key>Info</key>
-				<integer>1</integer>
+				<integer>100</integer>
 			</dict>
 			<key>ID</key>
 			<integer>86</integer>
 			<key>Rotation</key>
-			<real>318.95730590820312</real>
+			<real>138.95732116699219</real>
 			<key>Shape</key>
 			<string>AdjustableArrow</string>
 			<key>ShapeData</key>
@@ -214,7 +392,7 @@
 			<key>Tail</key>
 			<dict>
 				<key>ID</key>
-				<integer>100</integer>
+				<integer>24</integer>
 			</dict>
 			<key>TextRelativeArea</key>
 			<string>{{0.125, 0.25}, {0.75, 0.5}}</string>
@@ -229,12 +407,12 @@
 			<key>Head</key>
 			<dict>
 				<key>ID</key>
-				<integer>24</integer>
+				<integer>106</integer>
 			</dict>
 			<key>ID</key>
 			<integer>85</integer>
 			<key>Rotation</key>
-			<real>311.23626708984375</real>
+			<real>131.23625183105469</real>
 			<key>Shape</key>
 			<string>AdjustableArrow</string>
 			<key>ShapeData</key>
@@ -298,7 +476,9 @@
 			<key>Tail</key>
 			<dict>
 				<key>ID</key>
-				<integer>106</integer>
+				<integer>24</integer>
+				<key>Info</key>
+				<integer>1</integer>
 			</dict>
 			<key>TextRelativeArea</key>
 			<string>{{0.125, 0.25}, {0.75, 0.5}}</string>
@@ -313,12 +493,12 @@
 			<key>Head</key>
 			<dict>
 				<key>ID</key>
-				<integer>24</integer>
+				<integer>96</integer>
 			</dict>
 			<key>ID</key>
 			<integer>84</integer>
 			<key>Rotation</key>
-			<real>270</real>
+			<real>90</real>
 			<key>Shape</key>
 			<string>AdjustableArrow</string>
 			<key>ShapeData</key>
@@ -382,7 +562,7 @@
 			<key>Tail</key>
 			<dict>
 				<key>ID</key>
-				<integer>96</integer>
+				<integer>24</integer>
 			</dict>
 			<key>TextRelativeArea</key>
 			<string>{{0.125, 0.25}, {0.75, 0.5}}</string>
@@ -731,18 +911,18 @@
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{236.41585, 427.02896}, {154.38461, 15}}</string>
+			<string>{{237.69141, 427.02899}, {153.35278, 15}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>Head</key>
 			<dict>
 				<key>ID</key>
-				<integer>23</integer>
+				<integer>103</integer>
 			</dict>
 			<key>ID</key>
 			<integer>69</integer>
 			<key>Rotation</key>
-			<real>227.01785278320312</real>
+			<real>47.433109283447266</real>
 			<key>Shape</key>
 			<string>AdjustableArrow</string>
 			<key>ShapeData</key>
@@ -806,9 +986,7 @@
 			<key>Tail</key>
 			<dict>
 				<key>ID</key>
-				<integer>103</integer>
-				<key>Info</key>
-				<integer>2</integer>
+				<integer>24</integer>
 			</dict>
 			<key>TextRelativeArea</key>
 			<string>{{0.125, 0.25}, {0.75, 0.5}}</string>
@@ -1075,12 +1253,14 @@
 			<key>Head</key>
 			<dict>
 				<key>ID</key>
-				<integer>24</integer>
+				<integer>44</integer>
+				<key>Info</key>
+				<integer>3</integer>
 			</dict>
 			<key>ID</key>
 			<integer>64</integer>
 			<key>Rotation</key>
-			<real>1.3988231330586132e-05</real>
+			<real>180.00001525878906</real>
 			<key>Shape</key>
 			<string>AdjustableArrow</string>
 			<key>ShapeData</key>
@@ -1144,7 +1324,9 @@
 			<key>Tail</key>
 			<dict>
 				<key>ID</key>
-				<integer>44</integer>
+				<integer>24</integer>
+				<key>Info</key>
+				<integer>4</integer>
 			</dict>
 			<key>TextRelativeArea</key>
 			<string>{{0.125, 0.25}, {0.75, 0.5}}</string>
@@ -1153,18 +1335,20 @@
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{212.50589, 245.11746}, {98.468933, 15}}</string>
+			<string>{{213.27142, 245.11749}, {98.457138, 15}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>Head</key>
 			<dict>
 				<key>ID</key>
-				<integer>20</integer>
+				<integer>24</integer>
+				<key>Info</key>
+				<integer>2</integer>
 			</dict>
 			<key>ID</key>
 			<integer>63</integer>
 			<key>Rotation</key>
-			<real>269.11593627929688</real>
+			<real>90</real>
 			<key>Shape</key>
 			<string>AdjustableArrow</string>
 			<key>ShapeData</key>
@@ -1228,7 +1412,7 @@
 			<key>Tail</key>
 			<dict>
 				<key>ID</key>
-				<integer>24</integer>
+				<integer>21</integer>
 			</dict>
 			<key>TextRelativeArea</key>
 			<string>{{0.125, 0.25}, {0.75, 0.5}}</string>
@@ -1327,14 +1511,12 @@
 			<key>Head</key>
 			<dict>
 				<key>ID</key>
-				<integer>18</integer>
-				<key>Info</key>
-				<integer>3</integer>
+				<integer>21</integer>
 			</dict>
 			<key>ID</key>
 			<integer>61</integer>
 			<key>Rotation</key>
-			<real>180.00001525878906</real>
+			<real>2.3006963601801544e-05</real>
 			<key>Shape</key>
 			<string>AdjustableArrow</string>
 			<key>ShapeData</key>
@@ -1398,7 +1580,9 @@
 			<key>Tail</key>
 			<dict>
 				<key>ID</key>
-				<integer>21</integer>
+				<integer>18</integer>
+				<key>Info</key>
+				<integer>3</integer>
 			</dict>
 			<key>TextRelativeArea</key>
 			<string>{{0.125, 0.25}, {0.75, 0.5}}</string>
@@ -2550,7 +2734,7 @@ AaBb}</string>
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2012-02-26 03:48:11 +0000</string>
+	<string>2012-02-26 04:02:57 +0000</string>
 	<key>Modifier</key>
 	<string>Robie</string>
 	<key>NotesVisible</key>

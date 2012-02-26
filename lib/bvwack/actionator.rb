@@ -27,6 +27,7 @@ class Actionator
     end
   end
 
+  private
   def options
     @options
   end

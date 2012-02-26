@@ -12,6 +12,7 @@ module BVWack
       end
     end
 
+    private
     def file_obj
       @file_obj
     end

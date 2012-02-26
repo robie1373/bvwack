@@ -26,6 +26,7 @@ class Lister
     end
   end
 
+  private
   def lists
     @lists
   end
@@ -55,6 +56,4 @@ class Lister
     @lists[:not_converted_files]
     #{ "abc" => "cde"}
   end
-
-  private :file_obj, :base_dir, :lists, :base_convert_dir, :converted_file_list, :to_clean_list, :not_converted_list
 end

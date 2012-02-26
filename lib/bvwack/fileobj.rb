@@ -7,23 +7,6 @@ class FileObj
     #puts "fileObj#init @to_clean_list #{@to_clean_list}"
   end
 
-  def lists
-    @lists
-  end
-
-  #TODO rename not_converted_list to original_file_list
-  def not_converted_list
-    lists[:not_converted_files]
-  end
-
-  def to_clean_list
-    lists[:to_clean]
-  end
-
-  def to_convert
-    lists[:to_convert]
-  end
-
   def dirname
     File.dirname(not_converted_list[key])
   end
@@ -40,6 +23,7 @@ class FileObj
     to_clean_list.pop
   end
 
+  private
   def converted_filename
     converted_file_list[key]
   end
@@ -49,5 +33,20 @@ class FileObj
     not_converted_list[key]
   end
 
-  private :not_converted_list, :to_clean_list, :to_clean_list, :to_convert, :lists
+  def lists
+    @lists
+  end
+
+  #TODO rename not_converted_list to original_file_list
+  def not_converted_list
+    lists[:not_converted_files]
+  end
+
+  def to_clean_list
+    lists[:to_clean]
+  end
+
+  def to_convert
+    lists[:to_convert]
+  end
 end

@@ -31,6 +31,7 @@ class EchoBaseDirs
     base_dir
   end
 
+  private
   def options
     @options
   end

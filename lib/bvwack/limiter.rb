@@ -14,6 +14,7 @@
       limit
     end
 
+    private
     def options
       @options
     end
