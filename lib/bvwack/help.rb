@@ -5,7 +5,7 @@ include BVWack
 class Help
 
   def be_helpful
-    puts "
+  "
   Usage: bvwack <options>
 
   version #{BVWack::VERSION}

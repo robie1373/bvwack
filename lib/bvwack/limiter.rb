@@ -7,7 +7,7 @@
 
     def set_limit
       if options[:num_files]
-        limit = (options[:num_files] - 1).to_i
+        limit = (options[:num_files].to_i - 1)
       else
         limit = DEFAULT_ITERATION_LIMIT
       end

@@ -10,6 +10,10 @@ describe Runner do
       end
     end
     option_parser.parse!(['-b foo/bar'])
+    @spec_base_dir = SpecBaseDirs.new
+    @spec_file_obj = SpecFileObj.new(spec_lists)
+    lister = double Lister
+    @lister = lister.new(:lists => spec_lists, :base_dir => @spec_base_dir, :file_obj => @spec_file_obj)
   end
 
   describe "#run" do
