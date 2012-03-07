@@ -2,6 +2,7 @@ require_relative 'fileobj'
 require_relative 'filelistgetter'
 require_relative 'limiter'
 require_relative 'echobasedirs'
+require_relative 'drywacker'
 
 
 class Runner
@@ -26,7 +27,7 @@ class Runner
           Cleaner.new(:lists => lists, :file_obj => file_obj, :base_dir => base_dir).clean_up
 
         when command == :dry_wack
-          DryWacker.new(:lists => lists, :iteration => i, :file_obj => file_obj).dry_wack
+          DryWacker.new( :iteration => i, :file_obj => file_obj).dry_wack
 
         when command == :wack
           Wacker.new(:lists => lists, :iteration => i, :file_obj => file_obj).wack
@@ -41,7 +42,8 @@ class Runner
   end
 
   def file_obj
-    FileObj.new(:lists => @lists)
+    FileObj.new(:lists => lists)
+    puts "runner#FileObj dirname = #{FileObj.new(:lists=>lists).dirname}"
   end
 
   def iteration_limit

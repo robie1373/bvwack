@@ -7,66 +7,77 @@ class FileListGetter
   end
 
   def get_all_files
-    get_converted_files(base_dir, converted_files)
     #puts "filelistgetter#get_all_files ext_grep_pattern #{ext_grep_pattern}"
     get_original_files(base_dir, ext_grep_pattern)
+    #puts "filelistgetter#get_all_files @not_converted_files = #{@not_converted_files}"
+    get_converted_files(base_dir)
+    #puts "filelistgetter#get_all_files @converted_files = #{@converted_files}"
   end
 
   def get_original_files(base_dir, ext_grep_pattern)
     Dir.chdir(base_dir.base_convert_dir)
+    @not_converted_files = {}
+    #print "filelistgetter#get_original_files dirglobstuff "
+    #p (Dir.glob(File.join("**", "*.{#{ext_grep_pattern}}")))
     not_converted_files = Dir.glob(File.join("**", "*.{#{ext_grep_pattern}}"))
+    #print "filelistgetter#get_original_files not_converte_files = #{not_converted_files}"
     not_converted_files.each do |i|
       if i.include?("bvwack-back")
         next
       else
+        #print "filelistgetter#get_original_files file_formats = #{file_formats}"
         file_formats.each do |format|
           if File.basename(i).split(".").last == format
             @not_converted_files[File.basename(i, ".#{format}")] = i
+            #puts "filelistgetter#get_original_files @not_converted_files = #{@not_converted_files}"
             #elsif File.basename(i).split(".").last == "avi"
             #  @not_converted_files[File.basename(i, ".avi")] = i
           end
         end
       end
     end
+    #puts "filelistgetter#get_original_files @not_converted_files = #{@not_converted_files}"
   end
 
-  def get_converted_files(base_dir, converted_files)
+  def get_converted_files(base_dir)
+    @converted_files = {}
     Dir.chdir(base_dir.base_convert_dir)
     converted_files = Dir.glob(File.join("**", "*ipad.mp4"))
     converted_files.each do |i|
       if i.include?("bvwack-back")
         next
       else
-        converted_files[File.basename(i, ".ipad.mp4")] = i
+        @converted_files[File.basename(i, ".ipad.mp4")] = i
       end
     end
   end
 
-  def simple_get_conv_files(base_dir)
-    Dir.chdir(base_dir.base_convert_dir)
-    Dir.glob(File.join("**", "*ipad.mp4")).each do |i|
-      if i.include?("bvwack-back")
-        next
-      else
-        a, b = File.basename(i, ".ipad.mp4"), i
-      end
-      [a, b]
-    end
-    Hash[arrayish.first, arrayish.last]
-  end
+  #def simple_get_conv_files(base_dir)
+  #  Dir.chdir(base_dir.base_convert_dir)
+  #  Dir.glob(File.join("**", "*ipad.mp4")).each do |i|
+  #    if i.include?("bvwack-back")
+  #      next
+  #    else
+  #      a, b = File.basename(i, ".ipad.mp4"), i
+  #    end
+  #    [a, b]
+  #  end
+  #  Hash[arrayish.first, arrayish.last]
+  #end
 
-  def array_conv_files
-    Dir.glob(File.join("**", "*ipad.mp4")).each do |i|
-      if i.include?("bvwack-back")
-        next
-      else
-        a, b = File.basename(i, ".ipad.mp4"), i
-      end
-      p [a, b]
-    end
-  end
+  #def array_conv_files
+  #  Dir.glob(File.join("**", "*ipad.mp4")).each do |i|
+  #    if i.include?("bvwack-back")
+  #      next
+  #    else
+  #      a, b = File.basename(i, ".ipad.mp4"), i
+  #    end
+  #    p [a, b]
+  #  end
+  #end
 
   def lists
+    #puts "filelistgetter#lists converted_files = #{converted_files}\nnot_converted_files #{not_converted_files}\nto_convert #{get_unconverted_files}\nto_clean #{to_clean}"
     { :converted_files => converted_files, :not_converted_files => not_converted_files, :to_convert => get_unconverted_files, :to_clean => to_clean }
   end
 
@@ -81,11 +92,11 @@ class FileListGetter
   end
 
   def converted_files
-    { }
+    @converted_files
   end
 
   def not_converted_files
-    @not_converted_files = { }
+    @not_converted_files
   end
 
   #TODO this may be broken. It uses instance variables, and does not pass in appropriate things.

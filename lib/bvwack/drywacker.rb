@@ -1,7 +1,7 @@
 module BVWack
   class DryWacker
     def initialize(args)
-      @lists     = args[:lists]
+      #@lists     = args[:lists]
       @iteration = args[:iteration]
       @file_obj  = args[:file_obj]
     end
