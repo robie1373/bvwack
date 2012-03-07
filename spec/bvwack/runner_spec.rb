@@ -12,8 +12,8 @@ describe Runner do
     option_parser.parse!(['-b foo/bar'])
     @spec_base_dir = SpecBaseDirs.new
     @spec_file_obj = SpecFileObj.new(spec_lists)
-    lister = double Lister
-    @lister = lister.new(:lists => spec_lists, :base_dir => @spec_base_dir, :file_obj => @spec_file_obj)
+    #lister = double Lister
+    @lister = Lister.new(:lists => spec_lists, :base_dir => @spec_base_dir, :file_obj => @spec_file_obj)
   end
 
   describe "#run" do
@@ -25,7 +25,8 @@ describe Runner do
 
     commands.each do |command|
       it "calls the #{command} class" do
-        pending "find out how to test without running the actual classes"
+        #pending "find out how to test without running the actual classes"
+        Dir.pwd
         Runner.new(:command => command, :options => @options).run.should == ""
       end
     end

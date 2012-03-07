@@ -23,7 +23,7 @@ class Actionator
       when options[:wack] == TRUE
         Runner.new(:command => :wack, :options => options).run
       else
-        Help.new.be_helpful
+        puts Help.new.be_helpful
     end
   end
 
