@@ -43,7 +43,7 @@ class Runner
 
   def file_obj
     FileObj.new(:lists => lists)
-    puts "runner#FileObj dirname = #{FileObj.new(:lists=>lists).dirname}"
+    #puts "runner#FileObj dirname = #{FileObj.new(:lists=>lists).dirname}"
   end
 
   def iteration_limit

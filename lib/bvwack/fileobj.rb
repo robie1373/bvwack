@@ -8,7 +8,7 @@ class FileObj
   end
 
   def dirname
-    puts "fileobj#dirname not_converted_list = #{not_converted_list}"
+    #puts "fileobj#dirname not_converted_list[key] = #{not_converted_list[key]}"
     File.dirname(not_converted_list[key])
   end
 
@@ -48,7 +48,7 @@ class FileObj
   end
 
   def to_convert
-    puts "fileobj#to_convert lists #{p lists[:to_convert]}"
-    lists[:to_convert]
+    #puts "fileobj#to_convert lists #{p lists.lists[:to_convert]}"
+    lists.lists[:to_convert]
   end
 end
