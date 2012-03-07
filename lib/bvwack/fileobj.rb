@@ -1,19 +1,20 @@
 class FileObj
   def initialize(args)
     @lists = args[:lists]
+    @iteration = args[:iteration]
     #@to_clean_list      = args[:to_clean_list]
     #@to_convert         = args[:to_convert]
-    #puts "File0bj#init @not_converted_list #{@not_converted_list}"
+    #puts "File0bj#init @original_file_list #{@original_file_list}"
     #puts "fileObj#init to_convert  #{@lists.lists[:to_convert]}"
   end
 
   def dirname
-    #puts "fileobj#dirname not_converted_list[key] = #{not_converted_list[key]}"
-    File.dirname(not_converted_list[key])
+    puts "fileobj#dirname original_file_list[key] = #{original_file_list[iteration][key]}"
+    File.dirname(original_file_list[iteration][key])
   end
 
   def filename
-    not_converted_list[key]
+    original_file_list[key]
   end
 
   def path_to_file(iteration)
@@ -29,9 +30,8 @@ class FileObj
     converted_file_list[key]
   end
 
-  #TODO rename not_converted_filename to original_filename
-  def not_converted_filename
-    not_converted_list[key]
+  def original_filename
+    original_file_list[key]
   end
 
   def lists
@@ -39,7 +39,7 @@ class FileObj
   end
 
   #TODO rename not_converted_list to original_file_list
-  def not_converted_list
+  def original_file_list
     lists.lists[:not_converted_files]
   end
 
@@ -50,5 +50,9 @@ class FileObj
   def to_convert
     #puts "fileobj#to_convert lists #{p lists.lists[:to_convert]}"
     lists.lists[:to_convert]
+  end
+
+  def iteration
+    @iteration
   end
 end

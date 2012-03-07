@@ -3,7 +3,7 @@ require_relative 'filelistgetter'
 require_relative 'limiter'
 require_relative 'echobasedirs'
 require_relative 'drywacker'
-
+require_relative 'dryCleaner'
 
 class Runner
   def initialize(args)
@@ -21,7 +21,7 @@ class Runner
           Lister.new(:lists => lists, :base_dir => base_dir, :file_obj => file_obj).list_converted
 
         when command == :dry_clean_up
-          DryCleaner.new(:lists => lists, :file_obj => file_obj, :base_dir => base_dir).dry_clean_up
+          DryCleaner.new( :file_obj => file_obj(:iteration => i ), :base_dir => base_dir).dry_clean_up
 
         when command == :clean_up
           Cleaner.new(:lists => lists, :file_obj => file_obj, :base_dir => base_dir).clean_up
@@ -41,8 +41,8 @@ class Runner
     EchoBaseDirs.new(:options => options)
   end
 
-  def file_obj
-    FileObj.new(:lists => lists)
+  def file_obj(iteration)
+    FileObj.new(:lists => lists, :iteration => iteration)
     #puts "runner#FileObj dirname = #{FileObj.new(:lists=>lists).dirname}"
   end
 

@@ -1,15 +1,15 @@
 module BVWack
   class DryCleaner
     def initialize(args)
-      @lists    = args[:lists]
+      #@lists    = args[:lists]
       @file_obj = args[:file_obj]
       @base_dir = args[:base_dir]
     end
 
     def dry_clean_up
-      if to_clean_list.length > 0
+      #if to_clean_list.length > 0
         p "#{mv_string}\n\n"
-      end
+      #end
     end
 
     private
@@ -33,16 +33,16 @@ module BVWack
       base_dir.base_clean_dir
     end
 
-    def list
-      @lists
-    end
+    #def list
+    #  @lists
+    #end
 
-    def to_clean_list
-      list[:to_clean]
-    end
+    #def to_clean_list
+    #  lists.list[:to_clean]
+    #end
 
-    def not_converted_list
-      list[:not_converted_files]
-    end
+    #def not_converted_list
+    #  lists.list[:not_converted_files]
+    #end
   end
 end
