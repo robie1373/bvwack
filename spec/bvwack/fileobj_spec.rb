@@ -7,10 +7,12 @@ describe FileObj do
   end
 
   describe "#dirname" do
+    i = 0
     (spec_to_clean.length).times do
       it "should tell me the directory name" do
-        @file_obj.dirname.should == "dir1"
+        @file_obj.dirname(i).should == "dir1"
       end
+      i += 1
     end
   end
 

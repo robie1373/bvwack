@@ -9,6 +9,7 @@ class Runner
   def initialize(args)
     @command = args[:command]
     @options = args[:options]
+    lists
     #puts "Runner#init lists #{lists}"
     #puts "runner#init lists[:not_converted] #{lists[:not_converted_files]}"
   end
@@ -21,7 +22,7 @@ class Runner
           Lister.new(:lists => lists, :base_dir => base_dir, :file_obj => file_obj).list_converted
 
         when command == :dry_clean_up
-          DryCleaner.new( :file_obj => file_obj(:iteration => i ), :base_dir => base_dir).dry_clean_up
+          DryCleaner.new( :file_obj => file_obj(:lists => lists ), :base_dir => base_dir, :iteration => i).dry_clean_up
 
         when command == :clean_up
           Cleaner.new(:lists => lists, :file_obj => file_obj, :base_dir => base_dir).clean_up
@@ -41,8 +42,8 @@ class Runner
     EchoBaseDirs.new(:options => options)
   end
 
-  def file_obj(iteration)
-    FileObj.new(:lists => lists, :iteration => iteration)
+  def file_obj(lists)
+    FileObj.new(:lists => lists)
     #puts "runner#FileObj dirname = #{FileObj.new(:lists=>lists).dirname}"
   end
 
@@ -51,7 +52,7 @@ class Runner
   end
 
   def lists
-    FileListGetter.new(:options => options, :base_dir => base_dir)
+    FileListGetter.new(:options => options, :base_dir => base_dir).lists
   end
 
   def command

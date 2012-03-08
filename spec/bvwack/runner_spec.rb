@@ -25,7 +25,7 @@ describe Runner do
 
     commands.each do |command|
       it "calls the #{command} class" do
-        #pending "find out how to test without running the actual classes"
+        pending "find out how to test without running the actual classes"
         Dir.pwd
         Runner.new(:command => command, :options => @options).run.should == ""
       end

@@ -4,6 +4,8 @@ module BVWack
       #@lists    = args[:lists]
       @file_obj = args[:file_obj]
       @base_dir = args[:base_dir]
+      @iteration = args[:iteration]
+      puts "dryCleaner#init @iteration #{p @iteration}"
     end
 
     def dry_clean_up
@@ -14,7 +16,7 @@ module BVWack
 
     private
     def mv_string
-      %Q{mkdir -p "#{File.join(base_clean_dir, file_obj.dirname)}" && mv "#{file_obj.filename} #{File.join(base_clean_dir, file_obj.filename)}"}
+      %Q{mkdir -p "#{File.join(base_clean_dir, file_obj.dirname(iteration))}" && mv "#{file_obj.filename(iteration)} #{File.join(base_clean_dir, file_obj.filename(iteration))}"}
     end
 
     def file_obj
@@ -31,6 +33,11 @@ module BVWack
 
     def base_clean_dir
       base_dir.base_clean_dir
+    end
+
+    def iteration
+      puts "drycleaner#iteration #{p @iteration}"
+      @iteration
     end
 
     #def list

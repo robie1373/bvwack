@@ -1,28 +1,31 @@
+require 'ap'
+
 class FileObj
   def initialize(args)
     @lists = args[:lists]
-    @iteration = args[:iteration]
+    #@iteration = args[:iteration]
     #@to_clean_list      = args[:to_clean_list]
     #@to_convert         = args[:to_convert]
     #puts "File0bj#init @original_file_list #{@original_file_list}"
-    #puts "fileObj#init to_convert  #{@lists.lists[:to_convert]}"
+    #puts "fileObj#init @lists  #{ap @lists}"
   end
 
-  def dirname
-    puts "fileobj#dirname original_file_list[key] = #{original_file_list[iteration][key]}"
-    File.dirname(original_file_list[iteration][key])
+  def dirname(iteration)
+    #puts "fileobj#dirname original_file_list[key] = #{original_file_list[key(iteration)]}"
+    File.dirname(original_file_list[key(iteration)])
   end
 
-  def filename
-    original_file_list[key]
+  def filename(iteration)
+    original_file_list[key(iteration)]
   end
 
   def path_to_file(iteration)
     to_convert[iteration]
   end
 
-  def key
-    to_clean_list.pop
+  def key(iteration)
+    puts "fileobj#key origianl_file_list= #{ap original_file_list.keys}"
+    original_file_list.keys[iteration]
   end
 
   private
@@ -40,11 +43,12 @@ class FileObj
 
   #TODO rename not_converted_list to original_file_list
   def original_file_list
-    lists.lists[:not_converted_files]
+    #puts "fileobj#original_file_list lists[:not_converted_files]= #{ap lists}"
+    lists[:not_converted_files]
   end
 
   def to_clean_list
-    lists.lists[:to_clean]
+    lists[:to_clean]
   end
 
   def to_convert
@@ -52,7 +56,7 @@ class FileObj
     lists.lists[:to_convert]
   end
 
-  def iteration
-    @iteration
-  end
+  #def iteration
+  #  @iteration
+  #end
 end
