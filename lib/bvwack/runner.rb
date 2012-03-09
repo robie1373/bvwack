@@ -5,6 +5,7 @@ require_relative 'echobasedirs'
 require_relative 'drywacker'
 require_relative 'dryCleaner'
 require_relative 'cleaner'
+require_relative 'wacker'
 
 class Runner
   def initialize(args)
@@ -33,7 +34,7 @@ class Runner
           DryWacker.new( :iteration => i, :file_obj => file_obj).dry_wack
 
         when command == :wack
-          Wacker.new(:lists => lists, :iteration => i, :file_obj => file_obj).wack
+          Wacker.new(:iteration => i, :file_obj => file_obj).wack
         else
       end
     end
