@@ -1,21 +1,22 @@
 module BVWack
   class Cleaner
     def initialize(args)
-      @lists    = args[:lists]
+      #@lists    = args[:lists]
       @file_obj = args[:file_obj]
       @base_dir = args[:base_dir]
+      @iteration = args[:iteration]
     end
 
     def clean_up
-      if to_clean_list.length > 0
+      #if to_clean_list.length > 0
         #`#{mv_string}`
         p "I would have run clean_up\n\t#{mv_string}"
-      end
+      #end
     end
 
     private
     def mv_string
-      %Q{mkdir -p "#{File.join(base_clean_dir, file_obj.dirname)}" && mv "#{file_obj.filename} #{File.join(base_clean_dir, file_obj.filename)}"}
+      %Q{mkdir -p "#{File.join(base_clean_dir, file_obj.dirname(iteration))}" && mv "#{file_obj.filename(iteration)} #{File.join(base_clean_dir, file_obj.filename(iteration))}"}
     end
 
     def file_obj
@@ -34,16 +35,20 @@ module BVWack
       base_dir.base_clean_dir
     end
 
-    def lists
-      @lists
+    def iteration
+      @iteration
     end
 
-    def to_clean_list
-      lists[:to_clean]
-    end
+    #def lists
+    #  @lists
+    #end
 
-    def not_converted_list
-      lists[:not_converted_files]
-    end
+    #def to_clean_list
+    #  lists[:to_clean]
+    #end
+
+    #def not_converted_list
+    #  lists[:not_converted_files]
+    #end
   end
 end

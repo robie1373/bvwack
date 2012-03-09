@@ -5,7 +5,7 @@ module BVWack
       @file_obj = args[:file_obj]
       @base_dir = args[:base_dir]
       @iteration = args[:iteration]
-      puts "dryCleaner#init @iteration #{p @iteration}"
+      #puts "dryCleaner#init @iteration #{p @iteration}"
     end
 
     def dry_clean_up

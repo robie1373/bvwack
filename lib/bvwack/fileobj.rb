@@ -24,7 +24,7 @@ class FileObj
   end
 
   def key(iteration)
-    puts "fileobj#key origianl_file_list= #{ap original_file_list.keys}"
+    #puts "fileobj#key origianl_file_list= #{ap original_file_list.keys}"
     original_file_list.keys[iteration]
     #lists[:not_converted_files].keys[iteration]
   end

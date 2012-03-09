@@ -4,6 +4,7 @@ require_relative 'limiter'
 require_relative 'echobasedirs'
 require_relative 'drywacker'
 require_relative 'dryCleaner'
+require_relative 'cleaner'
 
 class Runner
   def initialize(args)
@@ -26,7 +27,7 @@ class Runner
           DryCleaner.new( :file_obj => file_obj, :base_dir => base_dir, :iteration => i).dry_clean_up
 
         when command == :clean_up
-          Cleaner.new(:lists => lists, :file_obj => file_obj, :base_dir => base_dir).clean_up
+          Cleaner.new(:file_obj => file_obj, :base_dir => base_dir, :iteration => i).clean_up
 
         when command == :dry_wack
           DryWacker.new( :iteration => i, :file_obj => file_obj).dry_wack
