@@ -54,7 +54,7 @@ class FileObj
 
   def to_convert
     #puts "fileobj#to_convert lists #{p lists.lists[:to_convert]}"
-    lists.lists[:to_convert]
+    lists[:to_convert]
   end
 
   #def iteration

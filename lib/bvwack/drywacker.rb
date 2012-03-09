@@ -7,9 +7,9 @@ module BVWack
     end
 
     def dry_wack
-      if file_obj.path_to_file(iteration).class == String
+      #if file_obj.path_to_file(iteration).class == String
         p "#{ffmpeg_string}\n\n"
-      end
+      #end
     end
 
     private

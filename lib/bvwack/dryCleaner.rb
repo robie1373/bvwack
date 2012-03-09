@@ -36,7 +36,7 @@ module BVWack
     end
 
     def iteration
-      puts "drycleaner#iteration #{p @iteration}"
+      #puts "drycleaner#iteration #{p @iteration}"
       @iteration
     end
 
