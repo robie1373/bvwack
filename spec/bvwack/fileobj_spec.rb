@@ -10,27 +10,39 @@ describe FileObj do
     i = 0
     (spec_to_clean.length).times do
       it "should tell me the directory name" do
-        @file_obj.dirname(i).should == "dir1"
+        @file_obj.dirname(i).should == spec_not_converted_dirs[i]
       end
       i += 1
     end
   end
 
   describe "#filename" do
-    it "should tell me the filename" do
-      @file_obj.filename.should == "dir1/file2.mkv"
+    i = 0
+    (spec_to_clean.length).times do
+      it "should tell me the filename" do
+        @file_obj.filename(i).should == spec_not_converted_files[spec_not_converted_files.keys[i]]
+      end
+      i += 1
     end
   end
 
   describe "#path_to_file" do
-    it "give me the path from PWD to the extension" do
-      @file_obj.filename.should == "dir1/file2.mkv"
+    i = 0
+    (spec_to_clean.length).times do
+      it "give me the path from PWD to the extension" do
+        @file_obj.filename(i).should == spec_to_convert[i]
+      end
+      i += 1
     end
   end
 
   describe "#key" do
-    it "should tell me the key to use for indexing the hashes. will be the filename minus the extension" do
-      @file_obj.key.should == "dir1/file2"
+    i = 0
+    (spec_to_clean.length).times do
+      it "should tell me the key to use for indexing the hashes. will be the filename minus the extension" do
+        @file_obj.key(i).should == spec_not_converted_files.keys[i]
+      end
+      i += 1
     end
   end
 end

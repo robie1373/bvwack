@@ -21,13 +21,16 @@ end
 def spec_not_converted_files
   { "dir1/file1" => "dir1/file1.avi", "dir1/dir2/file1" => "dir1/dir2/file1.mkv", "dir1/file2" => "dir1/file2.mkv" }
 end
+def spec_not_converted_dirs
+  %w{dir1 dir1/dir2 dir1}
+end
 
 def spec_converted_files
   { "dir1/file1" => "dir1/file1.ipad.mp4", "dir1/dir2/file1" => "dir1/dir2/file1.ipad.mp4", "dir1/file2" => "dir1/file2.ipad.mp4" }
 end
 
 def spec_to_convert
-  %w{ dir1/file1 dir1/dir2/file1 }
+  %w{ dir1/file1.avi dir1/dir2/file1.mkv }
 end
 
 def spec_to_clean
