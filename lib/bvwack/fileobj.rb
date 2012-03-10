@@ -3,15 +3,9 @@ require 'ap'
 class FileObj
   def initialize(args)
     @lists = args[:lists]
-    #@iteration = args[:iteration]
-    #@to_clean_list      = args[:to_clean_list]
-    #@to_convert         = args[:to_convert]
-    #puts "File0bj#init @original_file_list #{@original_file_list}"
-    #puts "fileObj#init @lists  #{ap @lists}"
   end
 
   def dirname(iteration)
-    #puts "fileobj#dirname original_file_list[key] = #{original_file_list[key(iteration)]}"
     File.dirname(original_file_list[key(iteration)])
   end
 
@@ -24,9 +18,7 @@ class FileObj
   end
 
   def key(iteration)
-    #puts "fileobj#key origianl_file_list= #{ap original_file_list.keys}"
     original_file_list.keys[iteration]
-    #lists[:not_converted_files].keys[iteration]
   end
 
   private
@@ -44,7 +36,6 @@ class FileObj
 
   #TODO rename not_converted_list to original_file_list
   def original_file_list
-    #puts "fileobj#original_file_list lists[:not_converted_files]= #{ap lists}"
     lists[:not_converted_files]
   end
 
@@ -53,11 +44,6 @@ class FileObj
   end
 
   def to_convert
-    #puts "fileobj#to_convert lists #{p lists.lists[:to_convert]}"
     lists[:to_convert]
   end
-
-  #def iteration
-  #  @iteration
-  #end
 end

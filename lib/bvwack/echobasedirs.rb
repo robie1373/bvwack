@@ -34,13 +34,3 @@ class EchoBaseDirs
     @options
   end
 end
-
-#class Putter
-#  def initialize
-#    @output = STDOUT
-#  end
-#
-#  def start
-#    p "i put"
-#  end
-#end

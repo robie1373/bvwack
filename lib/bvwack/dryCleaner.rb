@@ -1,11 +1,9 @@
 module BVWack
   class DryCleaner
     def initialize(args)
-      #@lists    = args[:lists]
       @file_obj = args[:file_obj]
       @base_dir = args[:base_dir]
       @iteration = args[:iteration]
-      #puts "dryCleaner#init @iteration #{p @iteration}"
     end
 
     def dry_clean_up
@@ -36,20 +34,7 @@ module BVWack
     end
 
     def iteration
-      #puts "drycleaner#iteration #{p @iteration}"
       @iteration
     end
-
-    #def list
-    #  @lists
-    #end
-
-    #def to_clean_list
-    #  lists.list[:to_clean]
-    #end
-
-    #def not_converted_list
-    #  lists.list[:not_converted_files]
-    #end
   end
 end

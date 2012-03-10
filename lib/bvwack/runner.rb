@@ -13,9 +13,6 @@ class Runner
     @command = args[:command]
     @options = args[:options]
     lists
-    #file_obj
-    #puts "Runner#init lists #{lists}"
-    #puts "runner#init lists[:not_converted] #{lists[:not_converted_files]}"
   end
 
   def run
@@ -48,7 +45,6 @@ class Runner
 
   def file_obj
     FileObj.new(:lists => lists)
-    #puts "runner#FileObj dirname = #{FileObj.new(:lists=>lists).dirname}"
   end
 
   def iteration_limit
