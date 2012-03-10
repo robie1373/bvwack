@@ -22,7 +22,7 @@ class Help
 
   Notes: I have set the FFMPEG options to use only 2 threads. This allows me to use my laptop while
          converting things. If you just want to hog through video try setting -threads 0
-         in FFMPEG_OPTS in constants.rb. Currently this only works on UNIX-like systems.
+         in FFMPEG_OPTS in constants.rb. This is not tested on Windows.
 
   Requirements: ffmpeg and a libx264-slow.ffpreset (possibly in your ~/.ffmpeg/ directory or in your Cellar if you use brew.) Google is your friend.
 

@@ -7,33 +7,36 @@ require_relative 'dryCleaner'
 require_relative 'cleaner'
 require_relative 'wacker'
 require_relative 'lister'
+require 'ap'
 
 class Runner
   def initialize(args)
     @command = args[:command]
     @options = args[:options]
     lists
+    ap lists
   end
 
   def run
     base_dir.echo_base_dirs
-    (0..iteration_limit).each do |i|
-      case
-        when command == :list_converted
-          Lister.new(:lists => lists, :base_dir => base_dir, :file_obj => file_obj).list_converted
+    if command == :list_converted
+      Lister.new(:lists => lists, :base_dir => base_dir, :file_obj => file_obj).list_converted
+    else
+      (0..iteration_limit).each do |i|
+        case
+          when command == :dry_clean_up
+            DryCleaner.new(:file_obj => file_obj, :base_dir => base_dir, :iteration => i).dry_clean_up
 
-        when command == :dry_clean_up
-          DryCleaner.new( :file_obj => file_obj, :base_dir => base_dir, :iteration => i).dry_clean_up
+          when command == :clean_up
+            Cleaner.new(:file_obj => file_obj, :base_dir => base_dir, :iteration => i).clean_up
 
-        when command == :clean_up
-          Cleaner.new(:file_obj => file_obj, :base_dir => base_dir, :iteration => i).clean_up
+          when command == :dry_wack
+            DryWacker.new(:iteration => i, :file_obj => file_obj).dry_wack
 
-        when command == :dry_wack
-          DryWacker.new( :iteration => i, :file_obj => file_obj).dry_wack
-
-        when command == :wack
-          Wacker.new(:iteration => i, :file_obj => file_obj).wack
-        else
+          when command == :wack
+            Wacker.new(:iteration => i, :file_obj => file_obj).wack
+          else
+        end
       end
     end
   end

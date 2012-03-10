@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.requirements          = ['ffmpeg and a libx264-slow.ffpreset (possibly in your ~/.ffmpeg/ directory.) Google is your friend.']
   s.rubyforge_project     = "bvwack"
   s.required_ruby_version = '>=1.9'
-  s.files                 = Dir['bin/**', 'lib/**', 'pkg/**', '*']
+  s.files                 = Dir['bin/**', 'lib/**/*', 'pkg/**', '*']
   s.executables           = ["bvwack"]
   s.has_rdoc              = false
 end

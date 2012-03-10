@@ -7,12 +7,14 @@ class Lister
 
   def list_converted
     begin
-      (0 .. (converted_file_list.keys.length - 1)).each do |i|
+      (0 .. (to_clean_list.length - 1)).each do |i|
+        key = to_clean_list[i]
+        puts "lister#list_converted key= #{key}"
         puts "\nConverted file:\n"
         puts %Q{In Directory "#{dirname(i)}"}
-        p `ls -lh "#{converted_file_list[converted_file_list.keys[i]]}"`
-        p `ls -lh "#{not_converted_list[not_converted_list.keys[i]]}"`
-        puts %Q{To test run:  open "#{File.join(base_convert_dir, converted_file_list[converted_file_list.keys[i]])}"}
+        p `ls -lh "#{converted_file_list[key]}"`
+        p `ls -lh "#{not_converted_list[key]}"`
+        puts %Q{To test run:  open "#{File.join(base_convert_dir, converted_file_list[key])}"}
         puts "\n"
       end
     rescue
