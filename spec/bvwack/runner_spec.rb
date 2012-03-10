@@ -18,10 +18,10 @@ describe Runner do
 
   describe "#run" do
 
-    it "shows me @commands" do
-      pending "for testing"
-      @commands.should == [1]
-    end
+    #it "shows me @commands" do
+    #  pending "for testing"
+    #  @commands.should == [1]
+    #end
 
     commands.each do |command|
       it "calls the #{command} class" do

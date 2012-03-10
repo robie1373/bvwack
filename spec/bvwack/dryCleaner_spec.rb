@@ -12,7 +12,7 @@ describe DryCleaner do
 
   describe "#dry_clean_up" do
     it "should write a copy of the clean_up command to STDOUT" do
-      pending "broken for some reason I can't be bothered to figure out right now"
+      #pending "broken for some reason I can't be bothered to figure out right now"
       @dry_cleaner.dry_clean_up.should == "#{@mv_string}\n\n"
     end
   end

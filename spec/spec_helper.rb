@@ -50,13 +50,14 @@ end
 class SpecFileObj
   def initialize(lists)
     @lists = lists
+    @iteration = 0
   end
 
-  def dirname
+  def dirname(iteration = 0)
     "dir1/file1"
   end
 
-  def filename
+  def filename(iteration = 0)
     "dir1/file1.avi"
   end
 
