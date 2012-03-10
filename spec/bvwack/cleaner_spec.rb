@@ -15,9 +15,8 @@ describe Cleaner do
 
   describe "#clean_up" do
     it "should write the clean_up command string to STDOUT" do
-      #pending "the if test in the clean_up method needs to get an iteration somehow."
-      #@cleaner.clean_up.should == `#{@mv_string}`
-      @cleaner.clean_up.should == "I would have run clean_up\n\t#{@mv_string}"
+      @cleaner.clean_up.should == `#{@mv_string}`
+      #@cleaner.clean_up.should == "I would have run clean_up\n\t#{@mv_string}"
     end
 
     #it "tells me if spec_lists is in scope" do

@@ -1,15 +1,13 @@
 class Wacker
   def initialize(args)
-    #@list      = args[:lists]
     @iteration = args[:iteration]
     @file_obj  = args[:file_obj]
   end
 
   def wack
     if file_obj.path_to_file(iteration).class == String
-
-      #`#{ffmpeg_string}`
-      p "I would have run\n\t#{ffmpeg_string}"
+      `#{ffmpeg_string}`
+      #p "I would have run\n\t#{ffmpeg_string}"
     end
   end
 
@@ -25,8 +23,4 @@ class Wacker
   def iteration
     @iteration
   end
-
-  #def list
-  #  @list
-  #end
 end

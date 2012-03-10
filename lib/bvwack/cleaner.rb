@@ -1,7 +1,6 @@
 module BVWack
   class Cleaner
     def initialize(args)
-      #@lists    = args[:lists]
       @file_obj = args[:file_obj]
       @base_dir = args[:base_dir]
       @iteration = args[:iteration]
@@ -9,8 +8,8 @@ module BVWack
 
     def clean_up
       if file_obj.path_to_file(iteration).class == String
-        #`#{mv_string}`
-        p "I would have run clean_up\n\t#{mv_string}"
+        `#{mv_string}`
+        #p "I would have run clean_up\n\t#{mv_string}"
       end
     end
 
@@ -38,17 +37,5 @@ module BVWack
     def iteration
       @iteration
     end
-
-    #def lists
-    #  @lists
-    #end
-
-    #def to_clean_list
-    #  lists[:to_clean]
-    #end
-
-    #def not_converted_list
-    #  lists[:not_converted_files]
-    #end
   end
 end
