@@ -6,11 +6,11 @@ class Wacker
   end
 
   def wack
-    #if file_obj.path_to_file(iteration).class == String
+    if file_obj.path_to_file(iteration).class == String
 
       #`#{ffmpeg_string}`
       p "I would have run\n\t#{ffmpeg_string}"
-    #end
+    end
   end
 
   private

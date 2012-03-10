@@ -8,10 +8,10 @@ module BVWack
     end
 
     def clean_up
-      #if to_clean_list.length > 0
+      if file_obj.path_to_file(iteration).class == String
         #`#{mv_string}`
         p "I would have run clean_up\n\t#{mv_string}"
-      #end
+      end
     end
 
     private

@@ -6,6 +6,7 @@ require_relative 'drywacker'
 require_relative 'dryCleaner'
 require_relative 'cleaner'
 require_relative 'wacker'
+require_relative 'lister'
 
 class Runner
   def initialize(args)

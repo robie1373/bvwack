@@ -9,9 +9,9 @@ module BVWack
     end
 
     def dry_clean_up
-      #if to_clean_list.length > 0
+      if file_obj.path_to_file(iteration).class == String
         p "#{mv_string}\n\n"
-      #end
+      end
     end
 
     private
